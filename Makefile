@@ -23,7 +23,7 @@ MKFILE_PATH := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 SRC_PATH    := $(MKFILE_PATH)/src
 SRC_CONFIG  := $(SRC_PATH)/config
 
-# destination path for vimrc and its direcotry
+# destination path for vimrc and its direcotry tree
 DST_PATH    := ${HOME}/.vim
 DST_TMP	    := $(DST_PATH)/tmp
 DST_CONFIG  := $(DST_PATH)/config
@@ -55,7 +55,7 @@ endef
 #   		   and creates corresponding vimrc
 #
 #   	update	 : update the destination config files with the ones present in 
-#   		   $(DST_CONFIGS)
+#   		   $(SRC_CONFIGS)
 #   
 #   	deliver	 : as update, but updates the source files
 #
@@ -66,6 +66,7 @@ endef
 .DEFAULT_GOAL := all  
 
 install: 
+	@[ -d $(DST_PATH) ] && mv $(DST_PATH) $(DST_PATH)_backup
 	@$(INSTALL) $(SRC_PATH)/ $(DST_PATH)/
 	@mkdir $(DST_TMP)
 
@@ -73,8 +74,7 @@ update:
 	@$(SYNC) $(SRC_PATH)/ $(DST_PATH)/
 
 deliver: 
-	@rm -rf $(DST_TMP)
-	@$(SYNC) $(DST_PATH)/ $(SRC_PATH)/
+	@$(SYNC) --exclude 'tmp' $(DST_PATH)/ $(SRC_PATH)/
 
 vimrc_reset: 
 	@# if .vimrc exists in user home make a backup in .vim/tmp/; else do nothing
@@ -94,5 +94,6 @@ vimrc: vimrc_reset $(DST_CONFIG_FILES)
 $(DST_CONFIG_FILES): 
 	$(call echo_config,$@)
 
+# default goal is to install the configs from source and generate
+# source based on them vimrc
 all: install vimrc
-
