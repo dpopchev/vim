@@ -13,7 +13,6 @@ silent! endwhile
 
 " enable plugin, detection and indentation on a file; for more info:
 " check :h filetype
-
 " NOTE: this overrides formatoptions
 filetype plugin indent on
 
@@ -52,4 +51,14 @@ function! EchoWARN(WARN)
 endfunction
 
 " this is a internal keybinding, which searches for help but I do not need it
-map <S-k> <Nop>
+noremap <S-k> <Nop>
+
+" map escape to double leader tab
+inoremap <leader><leader> <Esc>
+vnoremap <leader><leader> <Esc>
+
+" reload vimrc
+nnoremap <leader><return> :source $MYVIMRC<cr>
+
+" open vimrc for edit
+"nnoremap <leader><return> :e $MYVIMRC<cr>

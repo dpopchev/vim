@@ -3,6 +3,8 @@ SHELL := /usr/bin/env bash
 
 # common flags for rsync aliases
 RSYNC_COMMON_FLAGS := --quiet --recursive --progress
+RSYNC_COMMON_FLAGS += --exclude 'tmp'
+RSYNC_COMMON_FLAGS += --exclude '.netrwhist'
 
 # install means to create exact copy
 # which includes deleting files not existing in the source 
@@ -74,7 +76,7 @@ update:
 	@$(SYNC) $(SRC_PATH)/ $(DST_PATH)/
 
 deliver: 
-	@$(SYNC) --exclude 'tmp' $(DST_PATH)/ $(SRC_PATH)/
+	@$(SYNC) $(DST_PATH)/ $(SRC_PATH)/
 
 vimrc_reset: 
 	@# if .vimrc exists in user home make a backup in .vim/tmp/; else do nothing

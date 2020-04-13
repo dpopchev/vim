@@ -1,6 +1,4 @@
-"let colorscheme_def = "gruvbox"        " set default colorscheme
-let colorscheme_def = "molokai"
-
+let colorscheme_def = "molokai"         " set default colorscheme
 let colorscheme_fallback = "industry"   " set fallback colorscheme
 
 " try setting the default colorscheme

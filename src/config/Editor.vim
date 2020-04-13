@@ -96,6 +96,16 @@ set spell           " enable spellcheck
 set spelllang=en    " spellcheck language
 "set spellfile=...  " place to store additional words
 "set complete+=kspell   include spell check suggestions in completion menu
+hi clear SpellBad                                                
+hi SpellBad cterm=underline                                      
+hi clear SpellRare                                               
+hi SpellRare cterm=underline                                     
+hi clear SpellCap                                                
+hi SpellCap cterm=underline                                      
+hi clear SpellLocal
+hi SpellLocal cterm=underline
+
+hi Visual cterm=reverse ctermfg=NONE
 
 " source https://vim.fandom.com/wiki/Quickly_adding_and_deleting_empty_lines
 " single Ctrl-j/k deletes blank line below/above, and double -- inserts them.
@@ -127,3 +137,7 @@ nnoremap <silent> <leader>c "_c<cr>
 
 " toggle paste mode
 nnoremap <leader>p :set invpaste<cr>
+
+" visual shifting
+vnoremap < <gv
+vnoremap > >gv

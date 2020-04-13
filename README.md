@@ -86,6 +86,103 @@ make
 
 - vimrc
 
-  Creates an source based vim config, i.e. adds 'source ~/.vim/config/*.vim'
+  Creates an source based vim config, i.e. adds 'source \~/.vim/config/\*.vim'
   entries for the existing files in vimrc.
-  It will make a backup of the existing **~/.vimrc** in **~/.vim/tmp/**.
+  It will make a backup of the existing **\~/.vimrc** in **\~/.vim/tmp/**.
+
+### vim themes 
+
+I have included some external themes, but they may not be up to date. To
+download the latest, pelase follow the links below.
+
+The default colorscheme is set by the `colorscheme_def` variable in
+**UserInterface.vim**
+    
+- [gruvbox](https://github.com/morhetz/gruvbox)
+
+- [molokai](https://github.com/tomasr/molokai) 
+
+- [monokain](https://github.com/flazz/vim-colorschemes/blob/master/colors/monokain.vim)
+
+- [tender](https://github/com/jacoborus/tender.vim)
+
+- [rdark](https://raw.githubusercontent.com/flazz/vim-colorschemes/master/colors/rdark-terminal.vim)
+
+### shortcuts
+
+To generate extensive list of the active shortcuts defined in the configs do
+
+```
+find ~/.vim/ -type f -name "*.vim" | xargs sed '/^\"/d; /^$/d; /map/!d'
+```
+
+Here is not up to date result of the active shortcuts:
+
+- noremap <S-k> <Nop>
+
+  disable built in Shift+k help search by mapping it to nothing 
+
+- inoremap <leader><leader> <Esc>
+- vnoremap <leader><leader> <Esc>
+  
+  map ESC to double leader typing in insert and visual mode
+
+- nnoremap <leader><return> :source $MYVIMRC<cr>
+  
+  in normal mode reload vimrc via leader+enter
+
+- nnoremap <silent> <leader>/ :nohlsearch<cr>
+  
+  clear search highlight 
+
+- inoremap <expr> j ((pumvisible())?("\<C-n>"):("j"))
+- inoremap <expr> k ((pumvisible())?("\<C-p>"):("k"))
+  
+  use j and k to navigate in the completion menu triggered by CTRL+N/P
+  
+- inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+- inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
+- inoremap <expr> <C-p> pumvisible() ? '<C-p>' :
+- inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
+
+  make the completion menu more user friendly
+  
+- nnoremap U :call EchoWARN("check caps lock")<CR>
+
+  rise a warning that U is pressed, likely to caps lock
+
+- nnoremap <silent><C-j> m`:silent +g/\m^\s*$/d<CR>``:noh<CR>
+- nnoremap <silent><C-k> m`:silent -g/\m^\s*$/d<CR>``:noh<CR>
+
+  when CTRL+j/k is pressed removed the blank line below/above
+
+- nnoremap <silent><C-j><C-j> :set paste<CR>m`o<Esc>``:set nopaste<CR>
+- nnoremap <silent><C-k><C-k>  :set paste<CR>m`O<Esc>``:set nopaste<CR>
+
+  when CTRL-j/k is pressed twice add blank line below/above
+
+- nnoremap <silent> <leader>q :q<cr>
+
+  quit shortcut
+
+- nnoremap <silent> <leader>w :w<cr>
+
+  write shortcut
+
+- nnoremap <silent> <leader>d "_d<cr>
+
+  delete withouth saving to register (by sending it to so called black hole
+  register)
+
+- nnoremap <silent> <leader>c "_c<cr>
+
+  same, but with change, i.e. enter in insert mode
+
+- nnoremap <leader>p :set invpaste<cr>
+
+  toggle paste mode
+
+- vnoremap < <gv
+- vnoremap > >gv
+
+  shift text in visuall mode
