@@ -101,10 +101,11 @@ hi SpellBad cterm=underline
 hi clear SpellRare                                               
 hi SpellRare cterm=underline                                     
 hi clear SpellCap                                                
-hi SpellCap cterm=underline                                      
+hi SpellCap cterm=none                                      
 hi clear SpellLocal
 hi SpellLocal cterm=underline
 
+" better highlight in visual mode 
 hi Visual cterm=reverse ctermfg=NONE
 
 " source https://vim.fandom.com/wiki/Quickly_adding_and_deleting_empty_lines
@@ -120,20 +121,20 @@ nnoremap <silent><C-k><C-k>  :set paste<CR>m`O<Esc>``:set nopaste<CR>
 "nnoremap k :set paste<CR>m`O<Esc>``:set nopaste<CR>
 
 " quit without saving
-nnoremap <silent> <leader>q :q<cr>
+nnoremap <silent><leader>q :q<cr>
 
 " save file
-nnoremap <silent> <leader>w :w<cr>
+nnoremap <silent><leader>w :w<cr>
 let g:syntastic_auto_jump = 0 " prevent cursor jumping when :w
 
 " toggle all line numbers
 "nnoremap <silent> <leader>n :set invnumber invrelativenumber<cr>
 
 " delete without saving to register (sent it to 'black hole' register)
-nnoremap <silent> <leader>d "_d<cr>
+nnoremap <silent><leader>d "_d<cr>
 
 " change with sending to 'black hole' register
-nnoremap <silent> <leader>c "_c<cr>
+nnoremap <silent><leader>c "_c<cr>
 
 " toggle paste mode
 nnoremap <leader>p :set invpaste<cr>

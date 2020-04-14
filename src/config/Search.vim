@@ -9,4 +9,4 @@ set smartcase	" automatically switch to case-sensitive when search
 set magic       " for regular expressions turn magic on
 
 " clear search highlight
-nnoremap <silent> <leader>/ :nohlsearch<cr>
+nnoremap <silent><leader>/ :nohlsearch<cr>
