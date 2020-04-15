@@ -4,6 +4,19 @@ let textThreshold=80                " set desired text width
 let &textwidth=textThreshold        " maximum allowed width of a line
 let &colorcolumn=textThreshold+1    " set text length marker
 
+" toggle cheatsheet
+set foldenable            " enable folding
+set foldlevelstart=10     " starting fold level when buffer is opened
+                          " it ensures only very nested blocks of code are
+                          " folded when opening a buffer
+set foldmethod=indent     " fold is based on indent level
+" folding cheat sheet
+"   zf#j/k      create fold from cursor down/up # number of lines
+"   zj/k        move cursor to next fold down/up
+"   zo/O        open fold/all folds at the cursor
+" let space toggle a folding
+nnoremap <leader><space> za
+
 set nowrap                          " disable line wrap
 set linebreak                       " avoid wrapping a lien in middle of a word
 set display+=lastline               " try to show paragraphs last line

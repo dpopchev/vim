@@ -1,5 +1,5 @@
 "set complete-=i     " limit the files searched for auto-complted
-"set lazyredraw      " dont update screen during macro and script execution
+set lazyredraw      " dont update screen during macro and script execution
 "set ttyfast         " improves redrawing on newer computers
 
 " if $TERM is set to use 256 colors to give 256 value to t_Co
