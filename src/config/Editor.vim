@@ -96,16 +96,16 @@ set spell           " enable spellcheck
 set spelllang=en    " spellcheck language
 "set spellfile=...  " place to store additional words
 "set complete+=kspell   include spell check suggestions in completion menu
-hi clear SpellBad                                                
-hi SpellBad cterm=underline                                      
-hi clear SpellRare                                               
-hi SpellRare cterm=underline                                     
-hi clear SpellCap                                                
-hi SpellCap cterm=none                                      
+hi clear SpellBad
+hi SpellBad cterm=underline
+hi clear SpellRare
+hi SpellRare cterm=underline
+hi clear SpellCap
+hi SpellCap cterm=none
 hi clear SpellLocal
 hi SpellLocal cterm=underline
 
-" better highlight in visual mode 
+" better highlight in visual mode
 hi Visual cterm=reverse ctermfg=NONE
 
 " source https://vim.fandom.com/wiki/Quickly_adding_and_deleting_empty_lines
@@ -142,3 +142,9 @@ nnoremap <leader>p :set invpaste<cr>
 " visual shifting
 vnoremap < <gv
 vnoremap > >gv
+
+" detect indent via DetectIndendt plugin
+augroup filetype_html
+    autocmd!
+    autocmd BufEnter * :DetectIndent
+augroup END
