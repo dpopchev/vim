@@ -45,26 +45,30 @@ set history=500         " increase undo limit
 " press 'q' to exit help buffer
 autocmd FileType help noremap <buffer>q :q<cr>
 
-" trim automatically all trailing white spaces when :w
-"
-" try with simple substitution
-"autocmd BufWritePre * %s/\s\+$//e
-"
-" or with dedicated function
-"autocmd BufWritePre * call TrimTrailingSpaces()
-"
-"function TrimTrailingSpaces()
-"    " trim the trailing spaces on each line
-"    " and make sure the cursor stays at the same position
-"
-"    let save_pos = getpos(".")
-"    " one way
-"    " %s/\S\zs\s\+$//e
-"    "
-"    " or another
-"    %s/\s\+$//e
-"    call setpos('.', save_pos)
-"endfunction
+" trim trailing spaces and blank lines at end of the file
+autocmd BufWritePre * call TrimTrailingSpaces()
+autocmd BufWritePre * call TrimTrailingBlankLines()
+
+function TrimTrailingSpaces()
+    " trim the trailing spaces on each line
+    " and make sure the cursor stays at the same position
+
+    let save_pos = getpos(".")
+    " one way
+    " %s/\S\zs\s\+$//e
+    " or
+    %s/\s\+$//e
+    call setpos('.', save_pos)
+endfunction
+
+function TrimTrailingBlankLines()
+    " trim the trailing spaces on each line
+    " and make sure the cursor stays at the same position
+
+    let save_pos = getpos(".")
+    silent! %s#\($\n\s*\)\+\%$##
+    call setpos('.', save_pos)
+endfunction
 
 " function to advanced make of the currently open file
 " TODO work in prgress
@@ -108,4 +112,3 @@ autocmd FileType help noremap <buffer>q :q<cr>
 ""noremap <F5> :w<bar>make run<bar>redraw<CR>
 "noremap <F7> :w<bar>make build<bar>redraw<CR>
 "noremap <F10> :w<bar>make all<bar>redraw<CR>
-
