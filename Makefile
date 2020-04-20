@@ -28,17 +28,17 @@ SRC_PATH    := $(MKFILE_PATH)/src
 SRC_CONFIG  := $(SRC_PATH)/config
 
 # destination path for vimrc and its direcotry tree
-DST_PATH    := ${HOME}/.config/vim
+DST_PATH    := ${HOME}/.vim
 DST_TMP	    := $(DST_PATH)/tmp
 DST_CONFIG  := $(DST_PATH)/config
-DST_COLOR   := $(DST_PATH)/color
+DST_COLOR   := $(DST_PATH)/colors
 DST_PLUGIN  := $(DST_PATH)/plugin
 
 # to decouple the dependency of creating vimrc and installing vim modules
 # the existing *.vim files are stored as phony targets
-# TODO for new install it is unreasonable to expect same tree structure
-# TODO should make a check if the variable is empty
-DST_CONFIG_FILES := $(filter-out $(DST_CONFIG)/Init.vim,$(wildcard $(DST_CONFIG)/*.vim))
+DST_CONFIG_FILES := $(wildcard $(SRC_CONFIG)/*.vim)
+DST_CONFIG_FILES := $(patsubst $(SRC_CONFIG), $(DST_CONFIG), $(DST_CONFIG_FILES))
+DST_CONFIG_FILES := $(filter-out $(DST_CONFIG)/Init.vim,$(DST_CONFIG_FILES))
 .PHONY: $(DST_CONFIG_FILES)
 
 # vimrc separators
