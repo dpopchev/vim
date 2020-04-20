@@ -37,7 +37,7 @@ DST_PLUGIN  := $(DST_PATH)/plugin
 # to decouple the dependency of creating vimrc and installing vim modules
 # the existing *.vim files are stored as phony targets
 DST_CONFIG_FILES := $(wildcard $(SRC_CONFIG)/*.vim)
-DST_CONFIG_FILES := $(patsubst $(SRC_CONFIG), $(DST_CONFIG), $(DST_CONFIG_FILES))
+DST_CONFIG_FILES := $(patsubst $(SRC_CONFIG)/%,$(DST_CONFIG)/%,$(DST_CONFIG_FILES))
 DST_CONFIG_FILES := $(filter-out $(DST_CONFIG)/Init.vim,$(DST_CONFIG_FILES))
 .PHONY: $(DST_CONFIG_FILES)
 
