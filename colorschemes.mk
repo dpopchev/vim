@@ -79,8 +79,5 @@ COLORSCHEME_URL_$(lastword $(COLORSCHEMES)) := https://raw.githubusercontent.com
 COLORSCHEMES += hybrid_reverse
 COLORSCHEME_URL_$(lastword $(COLORSCHEMES)) := https://raw.githubusercontent.com/kristijanhusak/vim-hybrid-material/master/colors/hybrid_reverse.vim
 
-COLORSCHEMES += purify
-COLORSCHEME_URL_$(lastword $(COLORSCHEMES)) := https://raw.githubusercontent.com/kyoz/purify/master/vim/colors/purify.vim
-
 COLORSCHEMES += monokain
 COLORSCHEME_URL_$(lastword $(COLORSCHEMES)) := https://raw.githubusercontent.com/flazz/vim-colorschemes/master/colors/monokain.vim

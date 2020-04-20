@@ -203,3 +203,10 @@ It does the following
     - escape '<' and '>'  and '\`' characters by adding leading \
 
 1. sort them w.r.t. to first word
+
+### Notes
+
+To load debug info
+```
+vim -V9myVim.log
+```
