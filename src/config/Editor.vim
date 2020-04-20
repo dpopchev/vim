@@ -157,7 +157,7 @@ vnoremap < <gv
 vnoremap > >gv
 
 " detect indent via DetectIndendt plugin
-augroup filetype_html
+augroup DetectIndent
     autocmd!
-    autocmd BufEnter * :DetectIndent
+    autocmd BufReadPost * :DetectIndent
 augroup END
