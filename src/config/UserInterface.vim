@@ -6,8 +6,8 @@ let colorscheme_fallback = "industry"   " set fallback colorscheme
 try
     exe "colorscheme " . colorscheme_def
 catch /^Vim\%((\a\+)\)\=:E185/
-    EchoWARN("colorscheme not found " . colorscheme_def)
-    EchoWARN("will try with fallback: " . colorscheme_fallback)
+    :call EchoWARN("colorscheme not found " . colorscheme_def)
+    :call EchoWARN("will try with fallback: " . colorscheme_fallback)
     exe "colorscheme " . colorscheme_fallback
 endtry
 
@@ -59,6 +59,8 @@ function TrimTrailingSpaces()
     " or
     %s/\s\+$//e
     call setpos('.', save_pos)
+
+    return 0
 endfunction
 
 function TrimTrailingBlankLines()
@@ -68,7 +70,14 @@ function TrimTrailingBlankLines()
     let save_pos = getpos(".")
     silent! %s#\($\n\s*\)\+\%$##
     call setpos('.', save_pos)
+
+    return 0
 endfunction
+
+augroup HighlightFromFileStart
+    autocmd!
+    autocmd BufEnter * :syntax sync fromstart
+augroup END
 
 " function to advanced make of the currently open file
 " TODO work in prgress
