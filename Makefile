@@ -5,7 +5,7 @@ SHELL := /usr/bin/env bash
 RSYNC_COMMON_FLAGS := --quiet --recursive --progress
 RSYNC_COMMON_FLAGS += --exclude 'tmp'
 RSYNC_COMMON_FLAGS += --exclude '.netrwhist'
-RSYNC_COMMON_FLAGS += --exclude 'color'
+RSYNC_COMMON_FLAGS += --exclude 'colors'
 RSYNC_COMMON_FLAGS += --exclude 'plugin'
 
 # install means to create exact copy
