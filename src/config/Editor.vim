@@ -33,8 +33,8 @@ set number              " show line numbers
 set relativenumber      " show line numbers relative to current line
 
 set showmatch           " highlight matching brackets
-set matchpairs+=":"     " add double quotes to be matched as pairs
-set matchpairs+=':'     " add single quotes to be matched as pairs
+"set matchpairs+=":"     " add double quotes to be matched as pairs
+"set matchpairs+=':'     " add single quotes to be matched as pairs
 
 "set matchtime=5        " tenths of a second to show matching bracket parent
                         " default is 5
