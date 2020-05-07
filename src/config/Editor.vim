@@ -33,8 +33,9 @@ set number              " show line numbers
 set relativenumber      " show line numbers relative to current line
 
 set showmatch           " highlight matching brackets
-"set matchpairs+=":"     " add double quotes to be matched as pairs
-"set matchpairs+=':'     " add single quotes to be matched as pairs
+set matchpairs+=\":\"     " add double quotes to be matched as pairs
+set matchpairs+=\':\'     " add single quotes to be matched as pairs
+set matchpairs+=<:>
 
 "set matchtime=5        " tenths of a second to show matching bracket parent
                         " default is 5
@@ -57,14 +58,11 @@ inoremap <expr> k ((pumvisible())?("\<C-p>"):("k"))
 " enter key selects the highlighted option as <C-y> does
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 " keep menu item always highlighted by simulating <Up>/<Down> on pu visible
-inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
-  \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
-inoremap <expr> <C-p> pumvisible() ? '<C-p>' :
-  \ '<C-p><C-r>=pumvisible() ? "\<lt>Up>" : ""<CR>'
+inoremap <expr> <C-n> pumvisible() ? '<C-n>' : '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+inoremap <expr> <C-p> pumvisible() ? '<C-p>' : '<C-p><C-r>=pumvisible() ? "\<lt>Up>" : ""<CR>'
 
 " see link, more complicated and needs testing
-inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
-  \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+inoremap <expr> <M-,> pumvisible() ? '<C-n>' : '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 
 " source https://vim.fandom.com/wiki/Accessing_the_system_clipboard
 " check if clipboard supported in vim installation by
@@ -157,7 +155,10 @@ vnoremap < <gv
 vnoremap > >gv
 
 " detect indent via DetectIndendt plugin
-augroup DetectIndent
-    autocmd!
-    autocmd BufReadPost * :DetectIndent
-augroup END
+"augroup DetectIndent
+"    autocmd!
+"    autocmd BufReadPost * :DetectIndent
+"augroup END
+
+"set list listchars=tab:»-,trail:·,extends:»,precedes:«
+set list listchars=tab:❘-,trail:·,extends:»,precedes:«,nbsp:×
