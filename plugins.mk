@@ -16,6 +16,12 @@ PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/junegunn/vim-peekaboo.gi
 PLUGINS += vimrainbow
 PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/frazrepo/vim-rainbow.git
 
+# Please follow updated instructions from here
+# https://github.com/neoclide/coc.nvim/wiki/Install-coc.nvim
+# make sure you have nodejs >= 10.12
+# curl --fail -L https://github.com/neoclide/coc.nvim/archive/release.tar.gz|tar xzfv -
+# see available extensions here:
+# https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
 #PLUGINS += coc
 #PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/neoclide/coc.nvim
 
