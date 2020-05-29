@@ -47,14 +47,6 @@ LINE_SEPARATOR = $(LINE_PREFIX)
 LINE_SEPARATOR += $(shell printf '%.s-' {1..76})
 
 # make sure to get the latest versions of the plugins and color schemes
-DOWNLOAD := wget --quiet --output-document
-COLORSCHEMES_DOWNLOAD := $(DOWNLOAD) $(DST_COLOR)
-COLORSCHEMES :=
-include colorschemes.mk
-.PHONY: $(COLORSCHEMES)
-
-PLUGINS_DOWNLOAD := $(DOWNLOAD) $(DST_PLUGIN)
-PLUGINS :=
 include plugins.mk
 .PHONY: $(PLUGINS)
 
@@ -84,7 +76,7 @@ endef
 #
 #	plugin	: download plugins
 
-.PHONY: install update deliver vimrc vimrc_reset all colorscheme plugin
+.PHONY: install update deliver vimrc vimrc_reset all plugin
 .DEFAULT_GOAL := all
 
 install:
@@ -118,20 +110,14 @@ vimrc: vimrc_reset $(DST_CONFIG_FILES)
 $(DST_CONFIG_FILES):
 	$(call echo_config,$@)
 
-# each colorscheme is an separate recipe
-colorscheme: $(COLORSCHEMES)
-
-$(COLORSCHEMES):
-	@$(COLORSCHEMES_DOWNLOAD)/$@.vim $(COLORSCHEME_URL_$@) || \
-	    echo '$(@) colorscheme download failed'
-
 # each plugins is an separate recipe
 plugin: $(PLUGINS)
 
 $(PLUGINS):
-	@$(PLUGINS_DOWNLOAD)/$@.vim $(PLUGIN_URL_$@) || \
+	@cd $(DST_PLUGIN) && git clone $(PLUGIN_URL_$@) || \
 	    echo '$(@) plugin download failed'
+	@cd $(MKFILE_PATH)
 
 # default goal is to install the configs from source and generate
 # source based on them vimrc
-all: install vimrc colorscheme plugin
+all: install vimrc plugin
