@@ -5,7 +5,6 @@ SHELL := /usr/bin/env bash
 RSYNC_COMMON_FLAGS := --quiet --recursive --progress
 RSYNC_COMMON_FLAGS += --exclude 'tmp'
 RSYNC_COMMON_FLAGS += --exclude '.netrwhist'
-RSYNC_COMMON_FLAGS += --exclude 'colors'
 RSYNC_COMMON_FLAGS += --exclude 'pack'
 
 # install means to create exact copy
@@ -31,7 +30,6 @@ SRC_CONFIG  := $(SRC_PATH)/config
 DST_PATH    := ${HOME}/.vim
 DST_TMP	    := $(DST_PATH)/tmp
 DST_CONFIG  := $(DST_PATH)/config
-DST_COLOR   := $(DST_PATH)/colors
 DST_PLUGIN  := $(DST_PATH)/pack/plugins/start
 
 # to decouple the dependency of creating vimrc and installing vim modules
@@ -72,8 +70,6 @@ endef
 #  	vimrc    : generates the vimrc based on delivered configs to $(DST_CONFIGS)
 #		   it will make a backup of the old vimrc
 #
-#	colorscheme : download the colorschmes
-#
 #	plugin	: download plugins
 
 .PHONY: install update deliver vimrc vimrc_reset all plugin
@@ -83,7 +79,6 @@ install:
 	@[[ -d $(DST_PATH) ]] && $(INSTALL) $(DST_PATH)/ $(DST_PATH)_backup/ || :
 	@$(INSTALL) $(SRC_PATH)/ $(DST_PATH)/
 	@mkdir -p $(DST_TMP)
-	@mkdir -p $(DST_COLOR)
 	@mkdir -p $(DST_PLUGIN)
 
 update:

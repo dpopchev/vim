@@ -51,3 +51,6 @@ PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/nanotech/jellybeans.vim.
 
 PLUGINS += badwolf
 PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/sjl/badwolf.git
+
+PLUGINS += vimvisualstarsearch
+PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/nelstrom/vim-visual-star-search.git
