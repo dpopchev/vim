@@ -60,3 +60,9 @@ PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/sjl/badwolf.git
 
 PLUGINS += vimvisualstarsearch
 PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/nelstrom/vim-visual-star-search.git
+
+PLUGINS += vimperl
+PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/vim-perl/vim-perl.git
+
+PLUGINS += vimpythonjedi
+PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/davidhalter/jedi-vim.git
