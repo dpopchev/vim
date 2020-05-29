@@ -24,7 +24,10 @@ set display+=lastline               " try to show paragraphs last line
 " filetype plugins are overriding formatoptions, which is annoying;
 " I want the one below applied for all filetypes;
 " source: https://stackoverflow.com/questions/28375119/override-options-set-by-ftplugins-in-vim
-autocmd FileType * setlocal formatoptions=tcrqbj
+augroup ForceOverwriteFO
+    autocmd!
+    autocmd FileType * setlocal formatoptions=tcrqbj
+augroup END
 
 set scrolloff=5         " amount of lines to keep above and below cursor
 set sidescrolloff=5     " amount of screen columns to keep to the right
@@ -33,10 +36,8 @@ set number              " show line numbers
 set relativenumber      " show line numbers relative to current line
 
 set showmatch           " highlight matching brackets
-set matchpairs+=\":\"     " add double quotes to be matched as pairs
-set matchpairs+=\':\'     " add single quotes to be matched as pairs
+" extend default match pairs
 set matchpairs+=<:>
-
 "set matchtime=5        " tenths of a second to show matching bracket parent
                         " default is 5
 
@@ -48,24 +49,24 @@ set cursorline          " highlight current line
 "highlight CursorLine guibg=#303000 ctermbg=233
 
 "see https://vim.fandom.com/wiki/Omni_completion
-set omnifunc=syntaxcomplete#Complete
+"set omnifunc=syntaxcomplete#Complete
 
 " make vim competition popup more intuitive
 " source http://vim.wikia.com/wiki/Make_Vim_completion_popup_menu_work_just_like_in_an_IDE
-set completeopt=longest,menuone
+"set completeopt=longest,menuone
 
 " Making navigating in autocompletion menu work with jk
-inoremap <expr> j ((pumvisible())?("\<C-n>"):("j"))
-inoremap <expr> k ((pumvisible())?("\<C-p>"):("k"))
+"inoremap <expr> j ((pumvisible())?("\<C-n>"):("j"))
+"inoremap <expr> k ((pumvisible())?("\<C-p>"):("k"))
 
 " enter key selects the highlighted option as <C-y> does
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+"inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 " keep menu item always highlighted by simulating <Up>/<Down> on pu visible
-inoremap <expr> <C-n> pumvisible() ? '<C-n>' : '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
-inoremap <expr> <C-p> pumvisible() ? '<C-p>' : '<C-p><C-r>=pumvisible() ? "\<lt>Up>" : ""<CR>'
+"inoremap <expr> <C-n> pumvisible() ? '<C-n>' : '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+"inoremap <expr> <C-p> pumvisible() ? '<C-p>' : '<C-p><C-r>=pumvisible() ? "\<lt>Up>" : ""<CR>'
 
 " see link, more complicated and needs testing
-inoremap <expr> <M-,> pumvisible() ? '<C-n>' : '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+"inoremap <expr> <M-,> pumvisible() ? '<C-n>' : '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 
 " source https://vim.fandom.com/wiki/Accessing_the_system_clipboard
 " check if clipboard supported in vim installation by
@@ -157,11 +158,51 @@ nnoremap <leader>p :set invpaste<cr>
 vnoremap < <gv
 vnoremap > >gv
 
-" detect indent via DetectIndendt plugin
-"augroup DetectIndent
-"    autocmd!
-"    autocmd BufReadPost * :DetectIndent
-"augroup END
-
 "set list listchars=tab:»-,trail:·,extends:»,precedes:«
 set list listchars=tab:❘-,trail:·,extends:»,precedes:«,nbsp:×
+
+" press 'q' to exit help buffer
+augroup QtoExitHelpBuffer
+    autocmd!
+    autocmd FileType help noremap <buffer>q :q<cr>
+augroup END
+
+" Clean up before saving {{{
+function! TrimTrailingSpaces()
+    " trim the trailing spaces on each line
+    " and make sure the cursor stays at the same position
+
+    let save_pos = getpos(".")
+    " one way
+    " %s/\S\zs\s\+$//e
+    " or
+    %s/\s\+$//e
+    call setpos('.', save_pos)
+
+    return 0
+endfunction
+
+function! TrimTrailingBlankLines()
+    " trim the trailing spaces on each line
+    " and make sure the cursor stays at the same position
+
+    let save_pos = getpos(".")
+    silent! %s#\($\n\s*\)\+\%$##
+    call setpos('.', save_pos)
+
+    return 0
+endfunction
+
+" trim trailing spaces and blank lines at end of the file
+augroup TrimTrailingSpacesBlankLines
+    autocmd!
+    autocmd BufWritePre * call TrimTrailingSpaces()
+    autocmd BufWritePre * call TrimTrailingBlankLines()
+augroup END
+" }}} end clean up before saving
+
+" Always highlight from file start to prevent syntax highlight not be applied
+augroup HighlightFromFileStart
+    autocmd!
+    autocmd BufEnter * :syntax sync fromstart
+augroup END

@@ -18,11 +18,13 @@ catch /^Vim\%((\a\+)\)\=:E185/
 endtry
 
 " optional if different type of numbering is preferred in different mode
-"autocmd InsertEnter * :set number
-"autocmd InsertLeave * :set relativenumber
+"augroup ChaneNumberingInsertMode
+    "autocmd!
+    "autocmd InsertEnter * :set number
+    "autocmd InsertLeave * :set relativenumber
+"augroup END
 
 set showcmd             " show command in bottom bar
-
 set wildmenu            " display command line tab complete options as a menu
 set noruler             " do not display cursor position
 set laststatus=2        " always display status line
@@ -45,43 +47,6 @@ set backspace=2         " backspace fix, research
 set confirm             " display confirm dialog when closing an unsaved file
 "set hidden              " hide files in the background instead of closing
 set history=500         " increase undo limit
-
-" press 'q' to exit help buffer
-autocmd FileType help noremap <buffer>q :q<cr>
-
-" trim trailing spaces and blank lines at end of the file
-autocmd BufWritePre * call TrimTrailingSpaces()
-autocmd BufWritePre * call TrimTrailingBlankLines()
-
-function TrimTrailingSpaces()
-    " trim the trailing spaces on each line
-    " and make sure the cursor stays at the same position
-
-    let save_pos = getpos(".")
-    " one way
-    " %s/\S\zs\s\+$//e
-    " or
-    %s/\s\+$//e
-    call setpos('.', save_pos)
-
-    return 0
-endfunction
-
-function TrimTrailingBlankLines()
-    " trim the trailing spaces on each line
-    " and make sure the cursor stays at the same position
-
-    let save_pos = getpos(".")
-    silent! %s#\($\n\s*\)\+\%$##
-    call setpos('.', save_pos)
-
-    return 0
-endfunction
-
-augroup HighlightFromFileStart
-    autocmd!
-    autocmd BufEnter * :syntax sync fromstart
-augroup END
 
 " function to advanced make of the currently open file
 " TODO work in prgress

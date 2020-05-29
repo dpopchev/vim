@@ -37,7 +37,10 @@ set shiftround          " when shifting lines, round the indentation to the near
 "set smarttab           " insert tabstop number of spaces when tab
 
 " force set expandtab; use case is if filetype plugin has been executed earlier
-"autocmd FileType * setlocal expandtab " convert tabs to spaces
+"augroup ForceExpandtab
+    "autocmd!
+    "autocmd FileType * setlocal expandtab " convert tabs to spaces
+"augroup END
 
 " pseudo indentation guidelines accomplished by highlighting the cursorcolumn
 "set cursorcolumn
