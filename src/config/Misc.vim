@@ -22,11 +22,60 @@ set t_BE=            " remove extra characters when shift+insert
 "let g:netrw_winsize = 25
 "nnoremap <leader>t :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
 " lets use NERDtree plugin instead of build in file browser
-nnoremap <leader>t :NERDtreeToggle<cr>
+nnoremap <leader>t :NERDTreeToggle<cr>
+" in case I want to switch
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
 " }}} end file browser and such
+
+" NERDCommenter configs {{{
+" quick mapping recap
+"   <leader>ci  -- invert comments
+"   <leader>cy  -- yank the lines and then comment them
+"   <leader>c$  -- comment from cursor to EOL
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+"Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Enable NERDCommenterToggle to check all selected lines is commented or not
+let g:NERDToggleCheckAllLines = 1
+
+" in case of mixed selection NERD will nest the comments
+nnoremap <leader>c :call NERDComment(0,"nested")<cr>
+vnoremap <leader>c :call NERDComment(0,"nested")<cr>
+
+" when we have nested comments we need specify the action
+nnoremap <leader>C :call NERDComment(0,"uncomment")<cr>
+vnoremap <leader>C :call NERDComment(0,"uncomment")<cr>
+
+" toggle should be a quick shortcut
+nnoremap <leader>cc :call NERDComment(0,"toggle")<cr>
+vnoremap <leader>cc :call NERDComment(0,"toggle")<cr>
+
+" add comment deliminter at EOL and enter insert mode after it
+nnoremap <leader>ca :call NERDComment(0,"append")<cr>
+vnoremap <leader>ca :call NERDComment(0,"append")<cr>
+
+" }}} end NERDCommenter
 
 " show/hide Undotree plugin
 nnoremap <leader>u :UndotreeToggle<cr>
+
+" vim-man shortcuts {{{
+" open man page under cursor in horizontal/vertical split
+map <leader>k <Plug>(Man)
+map <leader>v <Plug>(VMan)
+" open man page for word under cursor in a horizontal split
+
+" }}}
 
 " recommend options for CtrlP plugin {{{
 " fuzzy search files
@@ -58,6 +107,3 @@ nnoremap <leader>s :CtrlP<cr>
 " Rainbow plugin config
 " rainbow plugin brackets activate globally
 let g:rainbow_active = 1
-
-" deoplete plugin
-"let g:deoplete#enable_at_startup = 1

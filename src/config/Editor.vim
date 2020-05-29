@@ -56,8 +56,8 @@ set cursorline          " highlight current line
 "set completeopt=longest,menuone
 
 " Making navigating in autocompletion menu work with jk
-"inoremap <expr> j ((pumvisible())?("\<C-n>"):("j"))
-"inoremap <expr> k ((pumvisible())?("\<C-p>"):("k"))
+inoremap <expr> j ((pumvisible())?("\<C-n>"):("j"))
+inoremap <expr> k ((pumvisible())?("\<C-p>"):("k"))
 
 " enter key selects the highlighted option as <C-y> does
 "inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
@@ -144,12 +144,6 @@ let g:syntastic_auto_jump = 0 " prevent cursor jumping when :w
 
 " toggle all line numbers
 "nnoremap <silent> <leader>n :set invnumber invrelativenumber<cr>
-
-" delete without saving to register (sent it to 'black hole' register)
-nnoremap <silent><leader>d "_d<cr>
-
-" change with sending to 'black hole' register
-nnoremap <silent><leader>c "_c<cr>
 
 " toggle paste mode
 nnoremap <leader>p :set invpaste<cr>
