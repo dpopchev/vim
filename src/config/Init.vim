@@ -16,9 +16,6 @@ silent! endwhile
 " NOTE: this overrides formatoptions
 filetype plugin indent on
 
-" NOTE: https://vim.fandom.com/wiki/Omni_completion
-set omnifunc=syntaxcomplete#Complete
-
 " optionally change the default leader key '\'
 " let mapleader=','
 

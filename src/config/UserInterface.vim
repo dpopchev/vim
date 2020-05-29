@@ -1,4 +1,10 @@
-let colorscheme_def = "badwolf"         " set default colorscheme
+" twiggle with gruvbox contrast settings, available are hard, soft and medium
+let g:gruvbox_contrast_dark = 'hard'
+let g:gruvbox_contrast_light = 'medium'
+" manually specify background color -- available are dark and light
+set background=light
+
+let colorscheme_def = "gruvbox"         " set default colorscheme
 let colorscheme_fallback = "industry"   " set fallback colorscheme
 
 " try setting the default colorscheme
@@ -10,8 +16,6 @@ catch /^Vim\%((\a\+)\)\=:E185/
     :call EchoWARN("will try with fallback: " . colorscheme_fallback)
     exe "colorscheme " . colorscheme_fallback
 endtry
-
-"set background=dark    " manually specify background color
 
 " optional if different type of numbering is preferred in different mode
 "autocmd InsertEnter * :set number

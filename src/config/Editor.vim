@@ -47,6 +47,9 @@ set cursorline          " highlight current line
 "autocmd WinLeave * setlocal nocursorline
 "highlight CursorLine guibg=#303000 ctermbg=233
 
+"see https://vim.fandom.com/wiki/Omni_completion
+set omnifunc=syntaxcomplete#Complete
+
 " make vim competition popup more intuitive
 " source http://vim.wikia.com/wiki/Make_Vim_completion_popup_menu_work_just_like_in_an_IDE
 set completeopt=longest,menuone

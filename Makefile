@@ -6,7 +6,7 @@ RSYNC_COMMON_FLAGS := --quiet --recursive --progress
 RSYNC_COMMON_FLAGS += --exclude 'tmp'
 RSYNC_COMMON_FLAGS += --exclude '.netrwhist'
 RSYNC_COMMON_FLAGS += --exclude 'colors'
-RSYNC_COMMON_FLAGS += --exclude 'plugin'
+RSYNC_COMMON_FLAGS += --exclude 'pack'
 
 # install means to create exact copy
 # which includes deleting files not existing in the source
@@ -32,7 +32,7 @@ DST_PATH    := ${HOME}/.vim
 DST_TMP	    := $(DST_PATH)/tmp
 DST_CONFIG  := $(DST_PATH)/config
 DST_COLOR   := $(DST_PATH)/colors
-DST_PLUGIN  := $(DST_PATH)/plugin
+DST_PLUGIN  := $(DST_PATH)/pack/plugins/start
 
 # to decouple the dependency of creating vimrc and installing vim modules
 # the existing *.vim files are stored as phony targets
