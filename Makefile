@@ -62,17 +62,17 @@ endef
 #	install	 : installs the configs to destination directory
 #   		   and creates corresponding vimrc
 #
-#   	update	 : update the destination config files with the ones present in
+#   	srcTOdst	 : update the destination config files with the ones present in
 #   		   $(SRC_CONFIGS)
 #
-#   	deliver	 : as update, but updates the source files
+#   	dstTOsrc	 : as update, but updates the source files
 #
 #  	vimrc    : generates the vimrc based on delivered configs to $(DST_CONFIGS)
 #		   it will make a backup of the old vimrc
 #
 #	plugin	: download plugins
 
-.PHONY: install update deliver vimrc vimrc_reset all plugin
+.PHONY: install srcTOdst dstTOsrc vimrc vimrc_reset all plugin
 .DEFAULT_GOAL := all
 
 install:
@@ -81,10 +81,10 @@ install:
 	@mkdir -p $(DST_TMP)
 	@mkdir -p $(DST_PLUGIN)
 
-update:
+srcTOdst:
 	@$(SYNC) $(SRC_PATH)/ $(DST_PATH)/
 
-deliver:
+dstTOsrc:
 	@$(SYNC) $(DST_PATH)/ $(SRC_PATH)/
 
 vimrc_reset:
