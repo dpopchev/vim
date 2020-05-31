@@ -40,7 +40,7 @@ set mouse=n             " enable mouse only in normal mode
 set cmdheight=2
 
 " time out length on mapping and key codes in that order
-set timeout timeoutlen=200 ttimeoutlen=100
+set timeout timeoutlen=500 ttimeoutlen=500
 
 "set autoread            " automatically re-read files
 set backspace=2         " backspace fix, research
