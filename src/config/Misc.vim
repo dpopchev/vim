@@ -53,12 +53,8 @@ nnoremap <leader>c :call NERDComment(0,"nested")<cr>
 vnoremap <leader>c :call NERDComment(0,"nested")<cr>
 
 " when we have nested comments we need specify the action
-nnoremap <leader>C :call NERDComment(0,"uncomment")<cr>
-vnoremap <leader>C :call NERDComment(0,"uncomment")<cr>
-
-" toggle should be a quick shortcut
-nnoremap <leader>cc :call NERDComment(0,"toggle")<cr>
-vnoremap <leader>cc :call NERDComment(0,"toggle")<cr>
+nnoremap <leader><leader>c :call NERDComment(0,"uncomment")<cr>
+vnoremap <leader><leader>c :call NERDComment(0,"uncomment")<cr>
 
 " add comment deliminter at EOL and enter insert mode after it
 nnoremap <leader>ca :call NERDComment(0,"append")<cr>
