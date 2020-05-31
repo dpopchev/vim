@@ -30,7 +30,7 @@ SRC_CONFIG  := $(SRC_PATH)/config
 DST_PATH    := ${HOME}/.vim
 DST_TMP	    := $(DST_PATH)/tmp
 DST_CONFIG  := $(DST_PATH)/config
-DST_PLUGIN  := $(DST_PATH)/pack/plugins/start
+DST_PLUGIN  := $(DST_PATH)/pack/plugins/opt
 
 # to decouple the dependency of creating vimrc and installing vim modules
 # the existing *.vim files are stored as phony targets
@@ -44,7 +44,7 @@ LINE_PREFIX    = \"
 LINE_SEPARATOR = $(LINE_PREFIX)
 LINE_SEPARATOR += $(shell printf '%.s-' {1..76})
 
-# make sure to get the latest versions of the plugins and color schemes
+# get the plugins dynamically
 include plugins.mk
 .PHONY: $(PLUGINS)
 
@@ -72,7 +72,7 @@ endef
 #
 #	plugin	: download plugins
 
-.PHONY: install srcTOdst dstTOsrc vimrc vimrc_reset all plugin
+.PHONY: install srcTOdst dstTOsrc vimrc vimrc_reset all plugins
 .DEFAULT_GOAL := all
 
 install:
@@ -106,13 +106,21 @@ $(DST_CONFIG_FILES):
 	$(call echo_config,$@)
 
 # each plugins is an separate recipe
-plugin: $(PLUGINS)
+# after their installation lets add them to the Init.vim to auot-load
+INSTALLED_PLUGINS = $(patsubst $(DST_PLUGIN)/%/,%,$(dir $(wildcard $(DST_PLUGIN)/*/)))
+.PHONY: $(INSTALLED_PLUGINS)
+plugins: $(PLUGINS) $(INSTALLED_PLUGINS)
 
+# each plugin is his own recipe
 $(PLUGINS):
-	@cd $(DST_PLUGIN) && git clone $(PLUGIN_URL_$@) || \
+	@cd $(DST_PLUGIN) && git clone --depth 1 $(PLUGIN_URL_$@) || \
 	    echo '$(@) plugin download failed'
 	@cd $(MKFILE_PATH)
 
+# and each successfully installed plugin will be loaded via the Init.vim
+$(INSTALLED_PLUGINS):
+	@echo packadd $(@) >> $(DST_CONFIG)/Init.vim
+
 # default goal is to install the configs from source and generate
 # source based on them vimrc
-all: install vimrc plugin
+all: install vimrc plugins
