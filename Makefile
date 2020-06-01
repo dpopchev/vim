@@ -72,8 +72,12 @@ endef
 #
 #	plugin	: download plugins
 
-.PHONY: install srcTOdst dstTOsrc vimrc vimrc_reset all plugins
+.PHONY: install srcTOdst dstTOsrc vimrc vimrc_reset all plugins clean
 .DEFAULT_GOAL := all
+
+clean:
+	@rm -rf ~/.vimrc
+	@rm -rf ~/.vim/
 
 install:
 	@[[ -d $(DST_PATH) ]] && $(INSTALL) $(DST_PATH)/ $(DST_PATH)_backup/ || :
@@ -107,19 +111,17 @@ $(DST_CONFIG_FILES):
 
 # each plugins is an separate recipe
 # after their installation lets add them to the Init.vim to auot-load
-INSTALLED_PLUGINS = $(patsubst $(DST_PLUGIN)/%/,%,$(dir $(wildcard $(DST_PLUGIN)/*/)))
-.PHONY: $(INSTALLED_PLUGINS)
-plugins: $(PLUGINS) $(INSTALLED_PLUGINS)
+plugins: $(PLUGINS)
+	$(foreach P,\
+		$(patsubst $(DST_PLUGIN)/%/,%,$(dir $(wildcard $(DST_PLUGIN)/*/))),\
+		$(file >>$(DST_CONFIG)/Init.vim,packadd $P)\
+		)
 
 # each plugin is his own recipe
 $(PLUGINS):
 	@cd $(DST_PLUGIN) && git clone --depth 1 $(PLUGIN_URL_$@) || \
 	    echo '$(@) plugin download failed'
 	@cd $(MKFILE_PATH)
-
-# and each successfully installed plugin will be loaded via the Init.vim
-$(INSTALLED_PLUGINS):
-	@echo packadd $(@) >> $(DST_CONFIG)/Init.vim
 
 # default goal is to install the configs from source and generate
 # source based on them vimrc
