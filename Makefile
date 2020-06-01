@@ -111,7 +111,10 @@ $(DST_CONFIG_FILES):
 
 # each plugins is an separate recipe
 # after their installation lets add them to the Init.vim to auot-load
-plugins: $(PLUGINS)
+plugins: $(PLUGINS) enable_plugins
+
+.PHONY: enable_plugins
+enable_plugins:
 	$(foreach P,\
 		$(patsubst $(DST_PLUGIN)/%/,%,$(dir $(wildcard $(DST_PLUGIN)/*/))),\
 		$(file >>$(DST_CONFIG)/Init.vim,packadd $P)\
