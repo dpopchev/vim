@@ -66,3 +66,6 @@ PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/vim-perl/vim-perl.git
 
 PLUGINS += vimpythonjedi
 PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/davidhalter/jedi-vim.git
+
+PLUGINS += ale
+PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/dense-analysis/ale.git

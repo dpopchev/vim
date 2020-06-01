@@ -92,12 +92,21 @@ nnoremap <leader>s :CtrlP<cr>
 "let g:ale_sign_priority=8
 "let g:gitgutter_sign_priority=9
 "let g:ale_sign_column_always=1
-" Write this in your vimrc file
-"let g:ale_lint_on_text_changed = 'never'
-"let g:ale_lint_on_insert_leave = 0
+
+" run linters only when file is saved
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_insert_leave = 0
+" if you don't want linters to run on opening a file
+" let g:ale_lint_on_enter = 0
 
 "let g:ale_completion_enabled=1
 "set omnifunc=ale#completion#OmniFunc
+
+" navigate between errors quickly
+nmap <silent> <leader>Ak <Plug>(ale_previous_wrap)
+nmap <silent> <leader>Aj <Plug>(ale_next_wrap)
+
+
 " }}} end ale configs
 
 " Rainbow plugin config
