@@ -43,11 +43,15 @@ set matchpairs+=<:>
 
 set cursorline          " highlight current line
 " if colorscheme is giving underline cursorline uncomment the below
+" augroup HacForCursorlineWhenUnavailable
+"     autocmd!
+"     autocmd WinEnter * setlocal cursorline
+"     autocmd WinLeave * setlocal nocursorline
+" augroup END
 "hi cursorline cterm=none term=none
-"autocmd WinEnter * setlocal cursorline
-"autocmd WinLeave * setlocal nocursorline
 "highlight CursorLine guibg=#303000 ctermbg=233
 
+" toggle with completion {{{
 "see https://vim.fandom.com/wiki/Omni_completion
 "set omnifunc=syntaxcomplete#Complete
 
@@ -60,13 +64,15 @@ inoremap <expr> j ((pumvisible())?("\<C-n>"):("j"))
 inoremap <expr> k ((pumvisible())?("\<C-p>"):("k"))
 
 " enter key selects the highlighted option as <C-y> does
-"inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
 " keep menu item always highlighted by simulating <Up>/<Down> on pu visible
 "inoremap <expr> <C-n> pumvisible() ? '<C-n>' : '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 "inoremap <expr> <C-p> pumvisible() ? '<C-p>' : '<C-p><C-r>=pumvisible() ? "\<lt>Up>" : ""<CR>'
 
 " see link, more complicated and needs testing
 "inoremap <expr> <M-,> pumvisible() ? '<C-n>' : '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+" }}}
 
 " source https://vim.fandom.com/wiki/Accessing_the_system_clipboard
 " check if clipboard supported in vim installation by
