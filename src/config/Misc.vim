@@ -112,3 +112,9 @@ nmap <silent> <leader>Aj <Plug>(ale_next_wrap)
 " Rainbow plugin config
 " rainbow plugin brackets activate globally
 let g:rainbow_active = 1
+
+" make vim ignore white spaces in vimdiff
+if &diff
+    " diff mode
+    set diffopt+=iwhite
+endif
