@@ -61,24 +61,3 @@ nnoremap <leader><return> :source $MYVIMRC<cr>
 
 " open vimrc for edit
 " nnoremap <leader><return> :e $MYVIMRC<cr>
-
-" load/unload plugins installed as described below
-" https://opensource.com/article/20/2/how-install-vim-plugins
-packadd vim-fugitive
-packadd gruvbox
-packadd ale
-packadd vim-visual-star-search
-packadd ctrlp.vim
-packadd VimCompletesMe
-packadd vim-colors-solarized
-packadd nerdtree
-packadd vim-man
-packadd vim-rainbow
-packadd jedi-vim
-packadd badwolf
-packadd vim-perl
-packadd auto-pairs
-packadd nerdcommenter
-packadd vim-peekaboo
-packadd jellybeans.vim
-packadd undotree

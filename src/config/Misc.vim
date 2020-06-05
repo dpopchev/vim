@@ -104,8 +104,71 @@ nmap <silent> <leader>Aj <Plug>(ale_next_wrap)
 " rainbow plugin brackets activate globally
 let g:rainbow_active = 1
 
-" make vim ignore white spaces in vimdiff
-if &diff
-    " diff mode
-    set diffopt+=iwhite
-endif
+" vim-mucomplete {{{
+set completeopt-=longest
+set completeopt+=menuone
+
+" choose one of below
+" set completeopt+=noselect
+set completeopt+=noinsert
+
+" other recommend settings
+set shortmess+=c   " Shut off completion messages
+set belloff+=ctrlg " If Vim beeps during completion
+
+" enable completition on startup or use :MUcompleteAutoToggle
+let g:mucomplete#enable_auto_at_startup = 1
+
+" if auto completition looks little overzealous
+let g:mucomplete#completion_delay = 1
+" }}}
+
+" syntastic {{{
+" :lnxet and lprevious will go around the erros;
+" get syntastic status with :SyntasticInfo
+nnoremap <leader>lm :lnext<cr>
+nnoremap <leader>ln :lprevious<cr>
+
+" recommend
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+" hide error list by default; show it with :Error
+let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" change symbols
+" let g:syntastic_error_symbol = '❌'
+" let g:syntastic_style_error_symbol = '⁉️'
+" let g:syntastic_warning_symbol = '⚠️'
+" let g:syntastic_style_warning_symbol = '💩'
+
+highlight link SyntasticErrorSign SignColumn
+highlight link SyntasticWarningSign SignColumn
+highlight link SyntasticStyleErrorSign SignColumn
+highlight link SyntasticStyleWarningSign SignColumn
+
+" set which checker to be used with following syntax
+" let g:syntastic_<filetype>_checkers = ['<checker-name>']
+let g:syntastic_python_checkers = ['pylint']
+let g:syntastic_perl_checkers = ['perl']
+let g:syntastic_sh_checkers = ['shellcheck']
+" }}}
+
+" jedi-vim {{{
+" jeid installation https://github.com/davidhalter/jedi
+" Completion <C-Space>
+" Goto assignment <leader>g (typical goto function)
+" Goto definition <leader>d (follow identifier as far as possible, includes imports and statements)
+" Goto (typing) stub <leader>s
+" Show Documentation/Pydoc K (shows a popup with assignments)
+" Renaming <leader>r
+" Usages <leader>n (shows all the usages of a name)
+" Open module, e.g. :Pyimport os (opens the os module)
+" }}}
+
+" load/unload plugins installed as described below
+" https://opensource.com/article/20/2/how-install-vim-plugins

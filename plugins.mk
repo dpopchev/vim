@@ -43,9 +43,15 @@ PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/nelstrom/vim-visual-star
 PLUGINS += vimmucomplete
 PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/lifepillar/vim-mucomplete.git
 
-# # PLUGINS += vimcompletesme
-# # PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/ajh17/VimCompletesMe.git
-#
+PLUGINS += syntastic
+PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/vim-syntastic/syntastic.git
+
+PLUGINS += vimperl
+PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/vim-perl/vim-perl.git
+
+PLUGINS += vimpythonjedi
+PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/davidhalter/jedi-vim.git
+
 # #PLUGINS += vimtest
 # #PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/vim-test/vim-test.git
 #
@@ -63,12 +69,3 @@ PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/lifepillar/vim-mucomplet
 # # https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
 # #PLUGINS += coc
 # #PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/neoclide/coc.nvim
-#
-# # PLUGINS += vimperl
-# # PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/vim-perl/vim-perl.git
-# #
-# # PLUGINS += vimpythonjedi
-# # PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/davidhalter/jedi-vim.git
-# #
-# # PLUGINS += ale
-# # PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/dense-analysis/ale.git
