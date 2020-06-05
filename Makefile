@@ -89,7 +89,7 @@ srcTOdst:
 	@$(SYNC) $(SRC_PATH)/ $(DST_PATH)/
 
 dstTOsrc:
-	@$(SYNC) $(DST_PATH)/ $(SRC_PATH)/
+	@$(INSTALL) $(DST_PATH)/ $(SRC_PATH)/
 
 vimrc_reset:
 	@# if .vimrc exists in user home make a backup in .vim/tmp/; else do nothing
@@ -117,7 +117,7 @@ plugins: $(PLUGINS) enable_plugins
 enable_plugins:
 	$(foreach P,\
 		$(patsubst $(DST_PLUGIN)/%/,%,$(dir $(wildcard $(DST_PLUGIN)/*/))),\
-		$(file >>$(DST_CONFIG)/Init.vim,packadd $P)\
+		$(file >>$(DST_CONFIG)/Misc.vim,packadd $P)\
 		)
 
 # each plugin is his own recipe

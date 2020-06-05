@@ -4,16 +4,7 @@
 set t_ut=            " fix highlight problem on win 10 wls
 set t_BE=            " remove extra characters when shift+insert
 
-" if $TERM is set to use 256 colors to give 256 value to t_Co
-" this is a suggested way to fix faulty colors in vim
-"
-" nevertheless, at the end seems better to just rely on vim and TERM to figure out
-"if $TERM == "xterm-256color" || $TERM == "rxvt-unicode-256color"
-"        \ || $COLORTERM == "gnome-terminal"
-"    set t_Co=256
-"endif
-
-" File browser and such {{{
+" CTRLP {{{
 " build in netwr quick configs and shortcuts
 " create file tree in the current directory
 "let g:netrw_browse_split = 2
@@ -26,9 +17,9 @@ nnoremap <leader>t :NERDTreeToggle<cr>
 " in case I want to switch
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
-" }}} end file browser and such
+" }}} end CTRLP
 
-" NERDCommenter configs {{{
+" NERDCommenter {{{
 " quick mapping recap
 "   <leader>ci  -- invert comments
 "   <leader>cy  -- yank the lines and then comment them
@@ -65,7 +56,7 @@ vnoremap <leader>ca :call NERDComment(0,"append")<cr>
 " show/hide Undotree plugin
 nnoremap <leader>u :UndotreeToggle<cr>
 
-" vim-man shortcuts {{{
+" vim-man {{{
 " open man page under cursor in horizontal/vertical split
 map <leader>k <Plug>(Man)
 map <leader>v <Plug>(VMan)
@@ -73,7 +64,7 @@ map <leader>v <Plug>(VMan)
 
 " }}}
 
-" recommend options for CtrlP plugin {{{
+" CtrlP plugin {{{
 " fuzzy search files
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.tar*,*.rar     " MacOSX/Linux
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
@@ -86,7 +77,7 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standar
 nnoremap <leader>s :CtrlP<cr>
 " }}} end Ctrlp recommend options
 
-" ALE configs {{{
+" ALE {{{
 " ALE and Gitgutter plugins are in conflict for the sign space
 " source https://github.com/dense-analysis/ale/issues/23
 "let g:ale_sign_priority=8
@@ -107,9 +98,9 @@ nmap <silent> <leader>Ak <Plug>(ale_previous_wrap)
 nmap <silent> <leader>Aj <Plug>(ale_next_wrap)
 
 
-" }}} end ale configs
+" }}} end ALE
 
-" Rainbow plugin config
+" Rainbow plugin
 " rainbow plugin brackets activate globally
 let g:rainbow_active = 1
 

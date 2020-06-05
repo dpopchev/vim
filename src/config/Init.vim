@@ -1,3 +1,4 @@
+" INITIAL SETTINGS {{{
 " Set 'nocompatible', if not already set to ward off unexpected things that
 " your distro might have made, as well as sanely reset options when
 " re-sourcing .vimrc It overrides options, so preferably set it at the beginning
@@ -46,8 +47,9 @@ function! EchoWARN(WARN)
 
     return 0
 endfunction
+" }}} end INITIAL SETTINGS
 
-" this is a internal keybinding, which searches for help but I do not need it
+" disable built in shortcut for help search since it is annoying and easy to missclick
 noremap <S-k> <Nop>
 
 " map escape to double leader tab
@@ -58,7 +60,25 @@ vnoremap <leader><leader> <Esc>
 nnoremap <leader><return> :source $MYVIMRC<cr>
 
 " open vimrc for edit
-"nnoremap <leader><return> :e $MYVIMRC<cr>
+" nnoremap <leader><return> :e $MYVIMRC<cr>
 
 " load/unload plugins installed as described below
 " https://opensource.com/article/20/2/how-install-vim-plugins
+packadd vim-fugitive
+packadd gruvbox
+packadd ale
+packadd vim-visual-star-search
+packadd ctrlp.vim
+packadd VimCompletesMe
+packadd vim-colors-solarized
+packadd nerdtree
+packadd vim-man
+packadd vim-rainbow
+packadd jedi-vim
+packadd badwolf
+packadd vim-perl
+packadd auto-pairs
+packadd nerdcommenter
+packadd vim-peekaboo
+packadd jellybeans.vim
+packadd undotree

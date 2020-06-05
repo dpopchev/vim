@@ -1,29 +1,8 @@
-PLUGINS += vimcompletesme
-PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/ajh17/VimCompletesMe.git
-
-#PLUGINS += vimtest
-#PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/vim-test/vim-test.git
-
 PLUGINS += vimpeekaboo
 PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/junegunn/vim-peekaboo.git
 
-#PLUGINS += vdebug
-#PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/vim-vdebug/vdebug.git
-
-#PLUGINS += tagbar
-#PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/majutsushi/tagbar.git
-
 PLUGINS += vimrainbow
 PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/frazrepo/vim-rainbow.git
-
-# Please follow updated instructions from here
-# https://github.com/neoclide/coc.nvim/wiki/Install-coc.nvim
-# make sure you have nodejs >= 10.12
-# curl --fail -L https://github.com/neoclide/coc.nvim/archive/release.tar.gz|tar xzfv -
-# see available extensions here:
-# https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
-#PLUGINS += coc
-#PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/neoclide/coc.nvim
 
 PLUGINS += nerdcommenter
 PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/preservim/nerdcommenter.git
@@ -61,11 +40,35 @@ PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/sjl/badwolf.git
 PLUGINS += vimvisualstarsearch
 PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/nelstrom/vim-visual-star-search.git
 
-PLUGINS += vimperl
-PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/vim-perl/vim-perl.git
+PLUGINS += vimmucomplete
+PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/lifepillar/vim-mucomplete.git
 
-PLUGINS += vimpythonjedi
-PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/davidhalter/jedi-vim.git
-
-PLUGINS += ale
-PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/dense-analysis/ale.git
+# # PLUGINS += vimcompletesme
+# # PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/ajh17/VimCompletesMe.git
+#
+# #PLUGINS += vimtest
+# #PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/vim-test/vim-test.git
+#
+# #PLUGINS += vdebug
+# #PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/vim-vdebug/vdebug.git
+#
+# #PLUGINS += tagbar
+# #PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/majutsushi/tagbar.git
+#
+# # Please follow updated instructions from here
+# # https://github.com/neoclide/coc.nvim/wiki/Install-coc.nvim
+# # make sure you have nodejs >= 10.12
+# # curl --fail -L https://github.com/neoclide/coc.nvim/archive/release.tar.gz|tar xzfv -
+# # see available extensions here:
+# # https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
+# #PLUGINS += coc
+# #PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/neoclide/coc.nvim
+#
+# # PLUGINS += vimperl
+# # PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/vim-perl/vim-perl.git
+# #
+# # PLUGINS += vimpythonjedi
+# # PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/davidhalter/jedi-vim.git
+# #
+# # PLUGINS += ale
+# # PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/dense-analysis/ale.git
