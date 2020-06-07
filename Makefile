@@ -90,6 +90,7 @@ srcTOdst:
 
 dstTOsrc:
 	@$(INSTALL) $(DST_PATH)/ $(SRC_PATH)/
+	@sed -i '/^packadd/d' $(wildcard $(SRC_CONFIG)/*.vim)
 
 vimrc_reset:
 	@# if .vimrc exists in user home make a backup in .vim/tmp/; else do nothing

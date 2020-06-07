@@ -71,7 +71,7 @@ make
 - install
 
   If there is an existing **~/.vim/** directory make a backup with the name
-  **~/.vim_backup**
+  **~/.vim\_backup**
   Copy the content of the project **src/** to newly created **~/.vim/**.
   Create **~/.vim/tmp** for auxiliary vim files.
 

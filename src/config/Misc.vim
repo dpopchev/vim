@@ -77,29 +77,6 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standar
 nnoremap <leader>s :CtrlP<cr>
 " }}} end Ctrlp recommend options
 
-" ALE {{{
-" ALE and Gitgutter plugins are in conflict for the sign space
-" source https://github.com/dense-analysis/ale/issues/23
-"let g:ale_sign_priority=8
-"let g:gitgutter_sign_priority=9
-"let g:ale_sign_column_always=1
-
-" run linters only when file is saved
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_insert_leave = 0
-" if you don't want linters to run on opening a file
-" let g:ale_lint_on_enter = 0
-
-"let g:ale_completion_enabled=1
-"set omnifunc=ale#completion#OmniFunc
-
-" navigate between errors quickly
-nmap <silent> <leader>Ak <Plug>(ale_previous_wrap)
-nmap <silent> <leader>Aj <Plug>(ale_next_wrap)
-
-
-" }}} end ALE
-
 " Rainbow plugin
 " rainbow plugin brackets activate globally
 let g:rainbow_active = 1
@@ -124,38 +101,40 @@ let g:mucomplete#completion_delay = 1
 " }}}
 
 " syntastic {{{
-" :lnxet and lprevious will go around the erros;
-" get syntastic status with :SyntasticInfo
-nnoremap <leader>lm :lnext<cr>
-nnoremap <leader>ln :lprevious<cr>
+if match(&runtimepath, 'MY-PLUGIN') != -1
+    " :lnxet and lprevious will go around the erros;
+    " get syntastic status with :SyntasticInfo
+    nnoremap <leader>lj :lnext<cr>
+    nnoremap <leader>lk :lprevious<cr>
 
-" recommend
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+    " recommend
+    set statusline+=%#warningmsg#
+    set statusline+=%{SyntasticStatuslineFlag()}
+    set statusline+=%*
 
-" hide error list by default; show it with :Error
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+    " hide error list by default; show it with :Error
+    let g:syntastic_always_populate_loc_list = 0
+    let g:syntastic_auto_loc_list = 0
+    let g:syntastic_check_on_open = 1
+    let g:syntastic_check_on_wq = 0
 
-" change symbols
-" let g:syntastic_error_symbol = '❌'
-" let g:syntastic_style_error_symbol = '⁉️'
-" let g:syntastic_warning_symbol = '⚠️'
-" let g:syntastic_style_warning_symbol = '💩'
+    " change symbols if you want
+    " let g:syntastic_error_symbol = '❌'
+    " let g:syntastic_style_error_symbol = '⁉️'
+    " let g:syntastic_warning_symbol = '⚠️'
+    " let g:syntastic_style_warning_symbol = '💩'
 
-highlight link SyntasticErrorSign SignColumn
-highlight link SyntasticWarningSign SignColumn
-highlight link SyntasticStyleErrorSign SignColumn
-highlight link SyntasticStyleWarningSign SignColumn
+    highlight link SyntasticErrorSign SignColumn
+    highlight link SyntasticWarningSign SignColumn
+    highlight link SyntasticStyleErrorSign SignColumn
+    highlight link SyntasticStyleWarningSign SignColumn
 
-" set which checker to be used with following syntax
-" let g:syntastic_<filetype>_checkers = ['<checker-name>']
-let g:syntastic_python_checkers = ['pylint']
-let g:syntastic_perl_checkers = ['perl']
-let g:syntastic_sh_checkers = ['shellcheck']
+    " set which checker to be used with following syntax
+    " let g:syntastic_<filetype>_checkers = ['<checker-name>']
+    let g:syntastic_python_checkers = ['pylint']
+    let g:syntastic_perl_checkers = ['perl']
+    let g:syntastic_sh_checkers = ['shellcheck']
+endif
 " }}}
 
 " jedi-vim {{{
@@ -172,3 +151,4 @@ let g:syntastic_sh_checkers = ['shellcheck']
 
 " load/unload plugins installed as described below
 " https://opensource.com/article/20/2/how-install-vim-plugins
+" packadd syntastic

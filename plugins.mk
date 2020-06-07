@@ -40,9 +40,6 @@ PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/sjl/badwolf.git
 PLUGINS += vimvisualstarsearch
 PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/nelstrom/vim-visual-star-search.git
 
-PLUGINS += vimmucomplete
-PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/lifepillar/vim-mucomplete.git
-
 PLUGINS += syntastic
 PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/vim-syntastic/syntastic.git
 
@@ -52,20 +49,23 @@ PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/vim-perl/vim-perl.git
 PLUGINS += vimpythonjedi
 PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/davidhalter/jedi-vim.git
 
-# #PLUGINS += vimtest
-# #PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/vim-test/vim-test.git
-#
-# #PLUGINS += vdebug
-# #PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/vim-vdebug/vdebug.git
-#
-# #PLUGINS += tagbar
-# #PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/majutsushi/tagbar.git
-#
-# # Please follow updated instructions from here
-# # https://github.com/neoclide/coc.nvim/wiki/Install-coc.nvim
-# # make sure you have nodejs >= 10.12
-# # curl --fail -L https://github.com/neoclide/coc.nvim/archive/release.tar.gz|tar xzfv -
-# # see available extensions here:
-# # https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
-# #PLUGINS += coc
-# #PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/neoclide/coc.nvim
+PLUGINS += vimbuftabline
+PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/ap/vim-buftabline.git
+
+PLUGINS += completor
+PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/maralla/completor.vim.git
+
+PLUGINS += vimsurround
+PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/tpope/vim-surround.git
+
+PLUGINS += vimrepeat
+PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/tpope/vim-repeat.git
+
+# Please follow updated instructions from here
+# https://github.com/neoclide/coc.nvim/wiki/Install-coc.nvim
+# make sure you have nodejs >= 10.12
+# curl --fail -L https://github.com/neoclide/coc.nvim/archive/release.tar.gz|tar xzfv -
+# see available extensions here:
+# https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
+#PLUGINS += coc
+#PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/neoclide/coc.nvim
