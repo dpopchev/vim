@@ -74,30 +74,35 @@ let g:ctrlp_custom_ignore = {
   \ 'link': 'some_bad_symbolic_links',
   \ }
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-nnoremap <leader>s :CtrlP<cr>
+nnoremap <leader>o :CtrlP<cr>
+
 " }}} end Ctrlp recommend options
 
 " Rainbow plugin
 " rainbow plugin brackets activate globally
 let g:rainbow_active = 1
 
-" vim-mucomplete {{{
-set completeopt-=longest
-set completeopt+=menuone
+" completor {{{
+" jedi completion
+" let g:completor_python_binary = '/path/to/python/with/jedi/installed'
+" other languages completion
 
-" choose one of below
-" set completeopt+=noselect
-set completeopt+=noinsert
+" completor tries to not overwrite the config completeopt, so use the one below
+" let g:completor_complete_options = 'menuone,noselect,preview'
 
-" other recommend settings
-set shortmess+=c   " Shut off completion messages
-set belloff+=ctrlg " If Vim beeps during completion
+" completor actions
+" jump to definition
+noremap <leader>gd :call completor#do('definition')<CR>
+" show documentation
+noremap <leader>gk :call completor#do('doc')<CR>
+" format code
+noremap <leader>g= :call completor#do('format')<CR>
+" hover info
+noremap <leader>gi :call completor#do('hover')<CR>
 
-" enable completition on startup or use :MUcompleteAutoToggle
-let g:mucomplete#enable_auto_at_startup = 1
-
-" if auto completition looks little overzealous
-let g:mucomplete#completion_delay = 1
+" maybe one would like to format the file after every buffer write?
+" do it with something like
+" autocmd BufWritePost *.go :call completor#do('format')
 " }}}
 
 " syntastic {{{
@@ -149,6 +154,13 @@ endif
 " Open module, e.g. :Pyimport os (opens the os module)
 " }}}
 
+" buftabline {{{
+set hidden
+nnoremap <leader>L :bnext<CR>
+nnoremap <leader>H :bprev<CR>
+nnoremap <leader>bd :bdelete<CR>
+nnoremap <leader>bb :ls<CR>
+" }}}
+
 " load/unload plugins installed as described below
 " https://opensource.com/article/20/2/how-install-vim-plugins
-" packadd syntastic

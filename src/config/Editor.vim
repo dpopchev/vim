@@ -233,8 +233,8 @@ set completeopt=longest,menuone
 " source https://vim.fandom.com/wiki/Improve_completion_popup_menu
 inoremap <expr> <Esc> (pumvisible())?("\<C-e>"):("\<Esc>")
 inoremap <expr> <CR> (pumvisible())?("\<C-y>"):("\<CR>")
-inoremap <expr> j ((pumvisible())?("\<C-n>"):("j"))
-inoremap <expr> k ((pumvisible())?("\<C-p>"):("k"))
+" inoremap <expr> j ((pumvisible())?("\<C-n>"):("j"))
+" inoremap <expr> k ((pumvisible())?("\<C-p>"):("k"))
 inoremap <expr> <C-d> (pumvisible())?("\<PageDown>\<C-p>\<C-n>"):("\<C-d>")
 inoremap <expr> <C-u> (pumvisible())?("\<PageUp>\<C-p>\<C-n>"):("\<C-u>")
 
@@ -320,7 +320,7 @@ set smartcase	" automatically switch to case-sensitive when search
 set magic       " for regular expressions turn magic on
 
 " clear search highlight
-nnoremap <silent><leader>/ :nohlsearch<cr>
+nnoremap <leader>/ :let @/=""<cr>
 " }}} SEARCH
 
 " vimdiff {{{
