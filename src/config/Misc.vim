@@ -106,40 +106,39 @@ noremap <leader>gi :call completor#do('hover')<CR>
 " }}}
 
 " syntastic {{{
-if match(&runtimepath, 'MY-PLUGIN') != -1
-    " :lnxet and lprevious will go around the erros;
-    " get syntastic status with :SyntasticInfo
-    nnoremap <leader>lj :lnext<cr>
-    nnoremap <leader>lk :lprevious<cr>
+" :lnxet and lprevious will go around the erros;
+" get syntastic status with :SyntasticInfo
+nnoremap <leader>lj :lnext<cr>
+nnoremap <leader>lk :lprevious<cr>
 
-    " recommend
-    set statusline+=%#warningmsg#
-    set statusline+=%{SyntasticStatuslineFlag()}
-    set statusline+=%*
+" recommend
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
-    " hide error list by default; show it with :Error
-    let g:syntastic_always_populate_loc_list = 0
-    let g:syntastic_auto_loc_list = 0
-    let g:syntastic_check_on_open = 1
-    let g:syntastic_check_on_wq = 0
+" hide error list by default; show it with :Error
+let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
-    " change symbols if you want
-    " let g:syntastic_error_symbol = '❌'
-    " let g:syntastic_style_error_symbol = '⁉️'
-    " let g:syntastic_warning_symbol = '⚠️'
-    " let g:syntastic_style_warning_symbol = '💩'
+" change symbols if you want
+" let g:syntastic_error_symbol = '❌'
+" let g:syntastic_style_error_symbol = '⁉️'
+" let g:syntastic_warning_symbol = '⚠️'
+" let g:syntastic_style_warning_symbol = '💩'
 
-    highlight link SyntasticErrorSign SignColumn
-    highlight link SyntasticWarningSign SignColumn
-    highlight link SyntasticStyleErrorSign SignColumn
-    highlight link SyntasticStyleWarningSign SignColumn
+highlight link SyntasticErrorSign SignColumn
+highlight link SyntasticWarningSign SignColumn
+highlight link SyntasticStyleErrorSign SignColumn
+highlight link SyntasticStyleWarningSign SignColumn
 
-    " set which checker to be used with following syntax
-    " let g:syntastic_<filetype>_checkers = ['<checker-name>']
-    let g:syntastic_python_checkers = ['pylint']
-    let g:syntastic_perl_checkers = ['perl']
-    let g:syntastic_sh_checkers = ['shellcheck']
-endif
+" set which checker to be used with following syntax
+" let g:syntastic_<filetype>_checkers = ['<checker-name>']
+let g:syntastic_python_checkers = ['pylint']
+let g:syntastic_perl_checkers = ['perl']
+let g:syntastic_enable_perl_checker = 1
+let g:syntastic_sh_checkers = ['shellcheck']
 " }}}
 
 " jedi-vim {{{
