@@ -61,7 +61,6 @@ nnoremap <leader>u :UndotreeToggle<cr>
 map <leader>k <Plug>(Man)
 map <leader>v <Plug>(VMan)
 " open man page for word under cursor in a horizontal split
-
 " }}}
 
 " CtrlP plugin {{{
@@ -88,17 +87,17 @@ let g:rainbow_active = 1
 " other languages completion
 
 " completor tries to not overwrite the config completeopt, so use the one below
-" let g:completor_complete_options = 'menuone,noselect,preview'
+" let g:completor_complete_options = 'menuone,noselect,preview,popup'
 
 " completor actions
 " jump to definition
-noremap <leader>gd :call completor#do('definition')<CR>
+" noremap <leader>gd :call completor#do('definition')<CR>
 " show documentation
-noremap <leader>gk :call completor#do('doc')<CR>
+" noremap <leader>gk :call completor#do('doc')<CR>
 " format code
-noremap <leader>g= :call completor#do('format')<CR>
+" noremap <leader>g= :call completor#do('format')<CR>
 " hover info
-noremap <leader>gi :call completor#do('hover')<CR>
+" noremap <leader>gi :call completor#do('hover')<CR>
 
 " maybe one would like to format the file after every buffer write?
 " do it with something like
@@ -108,8 +107,8 @@ noremap <leader>gi :call completor#do('hover')<CR>
 " syntastic {{{
 " :lnxet and lprevious will go around the erros;
 " get syntastic status with :SyntasticInfo
-nnoremap <leader>lj :lnext<cr>
-nnoremap <leader>lk :lprevious<cr>
+nnoremap <leader>ll :lnext<cr>
+nnoremap <leader>lL :lprevious<cr>
 
 " recommend
 set statusline+=%#warningmsg#
@@ -155,11 +154,39 @@ let g:syntastic_sh_checkers = ['shellcheck']
 
 " buftabline {{{
 set hidden
-nnoremap <leader>L :bnext<CR>
-nnoremap <leader>H :bprev<CR>
+nnoremap <C-right> :bnext<CR>
+nnoremap <C-left> :bprev<CR>
 nnoremap <leader>bd :bdelete<CR>
 nnoremap <leader>bb :ls<CR>
 " }}}
+
+" Ultisnips {{{
+" quick look at shortcuts
+" g:UltiSnipsExpandTrigger               <tab>
+" g:UltiSnipsListSnippets                <c-tab>
+" g:UltiSnipsJumpForwardTrigger          <c-j>
+" g:UltiSnipsJumpBackwardTrigger         <c-k>
+" }}}
+
+" vim-surround {{{
+" to change "" to '' do cs"'
+" it works with tags cs'<q>
+" also can do cst"
+" to remove ds"
+" to surround only a word, place cursor on it and ysiw]
+" to wrap an entire line yss) or yss( to give spacing
+" }}}
+
+" tabular {{{
+" to align w.r.t. = do :Tab /=
+" to align w.r.t. : in nested json do :Tab/:
+"   or to align, but exclude the : do :Tab /:\zs
+" to align markdown table do :Tab/|
+
+" align w.r.t. = or :
+nnoremap <leader>== :Tab /=<cr>\
+nnoremap <leader>=: :Tab /:<cr>\
+ " }}}
 
 " load/unload plugins installed as described below
 " https://opensource.com/article/20/2/how-install-vim-plugins

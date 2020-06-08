@@ -61,6 +61,9 @@ PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/tpope/vim-surround.git
 PLUGINS += vimrepeat
 PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/tpope/vim-repeat.git
 
+PLUGINS += tabular
+PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/godlygeek/tabular.git
+
 # Please follow updated instructions from here
 # https://github.com/neoclide/coc.nvim/wiki/Install-coc.nvim
 # make sure you have nodejs >= 10.12
