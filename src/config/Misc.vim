@@ -15,7 +15,7 @@ set t_BE=            " remove extra characters when shift+insert
 " lets use NERDtree plugin instead of build in file browser
 nnoremap <leader>t :NERDTreeToggle<cr>
 " in case I want to switch
-let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowExpandable  = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
 " }}} end CTRLP
 
@@ -184,8 +184,7 @@ nnoremap <leader>bb :ls<CR>
 " to align markdown table do :Tab/|
 
 " align w.r.t. = or :
-nnoremap <leader>== :Tab /=<cr>\
-nnoremap <leader>=: :Tab /:<cr>\
+vnoremap <leader>= :norm gvy<Esc>:Tab/<C-r>"<cr>
  " }}}
 
 " load/unload plugins installed as described below

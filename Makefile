@@ -27,10 +27,10 @@ SRC_PATH    := $(MKFILE_PATH)/src
 SRC_CONFIG  := $(SRC_PATH)/config
 
 # destination path for vimrc and its direcotry tree
-DST_PATH    := ${HOME}/.vim
-DST_TMP	    := $(DST_PATH)/tmp
-DST_CONFIG  := $(DST_PATH)/config
-DST_PLUGIN  := $(DST_PATH)/pack/plugins/opt
+DST_PATH   := ${HOME}/.vim
+DST_TMP    := $(DST_PATH)/tmp
+DST_CONFIG := $(DST_PATH)/config
+DST_PLUGIN := $(DST_PATH)/pack/plugins/opt
 
 # to decouple the dependency of creating vimrc and installing vim modules
 # the existing *.vim files are stored as phony targets
