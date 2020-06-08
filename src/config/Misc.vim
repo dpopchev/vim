@@ -110,7 +110,8 @@ let g:rainbow_active = 1
 nnoremap <leader>ll :lnext<cr>
 nnoremap <leader><leader>l :lprevious<cr>
 nnoremap <leader>L :Errors<cr>
-nnoremap <leader><leader>L :SyntasticReset<cr>
+nnoremap <leader><leader>L :SyntasticCheck<cr>
+nnoremap <leader><leader>LL :SyntasticToggleMode<cr>
 
 " recommend
 set statusline+=%#warningmsg#
@@ -120,7 +121,7 @@ set statusline+=%*
 " hide error list by default; show it with :Error
 let g:syntastic_always_populate_loc_list = 0
 let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_auto_jump = 0
 
