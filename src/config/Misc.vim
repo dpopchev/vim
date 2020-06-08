@@ -107,7 +107,7 @@ let g:rainbow_active = 1
 " syntastic {{{
 " :lnxet and lprevious will go around the erros;
 " get syntastic status with :SyntasticInfo
-nnoremap <leader>ll :lnext<cr>
+nnoremap <leader>l :lnext<cr>
 nnoremap <leader><leader>l :lprevious<cr>
 nnoremap <leader>L :Errors<cr>
 nnoremap <leader><leader>L :SyntasticCheck<cr>
