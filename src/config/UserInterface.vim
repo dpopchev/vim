@@ -2,7 +2,7 @@
 let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_contrast_light = 'medium'
 " manually specify background color -- available are dark and light
-set background=light
+set background=dark
 
 let colorscheme_def = "gruvbox"         " set default colorscheme
 let colorscheme_fallback = "industry"   " set fallback colorscheme
