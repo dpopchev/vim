@@ -108,7 +108,9 @@ let g:rainbow_active = 1
 " :lnxet and lprevious will go around the erros;
 " get syntastic status with :SyntasticInfo
 nnoremap <leader>ll :lnext<cr>
-nnoremap <leader>lL :lprevious<cr>
+nnoremap <leader><leader>l :lprevious<cr>
+nnoremap <leader>L :Errors<cr>
+nnoremap <leader><leader>L :SyntasticReset<cr>
 
 " recommend
 set statusline+=%#warningmsg#
@@ -120,6 +122,7 @@ let g:syntastic_always_populate_loc_list = 0
 let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_auto_jump = 0
 
 " change symbols if you want
 " let g:syntastic_error_symbol = '❌'
