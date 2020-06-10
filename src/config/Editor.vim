@@ -331,6 +331,8 @@ if &diff
     " put/obtain line cursor is on
     nnoremap <silent> <leader>dp V:diffput<cr>
     nnoremap <silent> <leader>do V:diffget<cr>
+    vnoremap <silent> <leader>dp <esc>gv:diffput<cr>
+    vnoremap <silent> <leader>do <esc>gv:diffget<cr>
 
     " undo the other, inactive window
     nnoremap <silent> <leader>du :wincmd w<cr>:normal u<cr>:wincmd w<cr>
