@@ -196,18 +196,23 @@ noremap <silent> <C-k><C-k> :call AddEmptyLineAbove()<CR>
 
 " FOLDING {{{
 " folding cheat sheet
+"   zc/o/a      close/open/toggle fold if the cursor is on one
+"   zC/O/A      close/open/toggle all fold levels around the cursor
+"   zr/m        reduce/increasing folding by opening/closing one more fold level
+"   zR/M        reduce/increasing folding by opening/closing one more fold level at all buffer
 "   zf#j/k      create fold from cursor down/up # number of lines
 "   zj/k        move cursor to next fold down/up
 "   zo/O        open fold/all folds at the cursor
 
-set foldenable            " enable folding
-set foldlevelstart=10     " starting fold level when buffer is opened
-                          " it ensures only very nested blocks of code are
-                          " folded when opening a buffer
-set foldmethod=indent     " fold is based on indent level
+set nofoldenable            " enable folding
+set foldlevelstart=5        " starting fold level when buffer is opened
+                            " it ensures only very nested blocks of code are
+                            " folded when opening a buffer
+set foldnestmax=10          " experimenting combinations of levelstart and nestmax
+set foldmethod=syntax       " fold is based on indent level
 
 " let space toggle a folding
-nnoremap <leader><space> za
+" nnoremap <leader><space> za
 " }}} end FOLDING
 
 " COMPLETION {{{
@@ -216,7 +221,7 @@ set omnifunc=syntaxcomplete#Complete
 
 " make vim competition popup more intuitive
 " source http://vim.wikia.com/wiki/Make_Vim_completion_popup_menu_work_just_like_in_an_IDE
-set completeopt=longest,menuone
+set completeopt=menuone,popup,noinsert,noselect
 
 " sample mapping configuration for pop up menu navigation {{{
 " " enter key selects the highlighted option as <C-y> does
