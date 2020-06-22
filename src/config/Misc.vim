@@ -176,56 +176,54 @@ vnoremap <leader>= :norm gvy<Esc>:Tab/<C-r>"<cr>
 " }}}
 
 " asyncomplete {{{
-" autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-"
-" let g:asyncomplete_remove_duplicates = 1
-" let g:asyncomplete_smart_completion = 1
-"
-" if executable('pyls')
-"     " pip install python-language-server
-"     au User lsp_setup call lsp#register_server({
-"         \ 'name': 'pyls',
-"         \ 'cmd': {server_info->['pyls']},
-"         \ 'whitelist': ['python'],
-"         \ })
-" endif
-"
-" call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
-"     \ 'name': 'buffer',
-"     \ 'whitelist': ['*'],
-"     \ 'blacklist': ['go'],
-"     \ 'completor': function('asyncomplete#sources#buffer#completor'),
-"     \ 'config': {
-"     \    'max_buffer_size': 5000000,
-"     \  },
-"     \ }))
-"
-" call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
-"     \ 'name': 'file',
-"     \ 'whitelist': ['*'],
-"     \ 'priority': 10,
-"     \ 'completor': function('asyncomplete#sources#file#completor')
-"     \ }))
-"
-" call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
-"     \ 'name': 'omni',
-"     \ 'whitelist': ['*'],
-"     \ 'blacklist': ['c', 'cpp', 'html'],
-"     \ 'completor': function('asyncomplete#sources#omni#completor')
-"     \  }))
-"
-" if has('python3')
-"     let g:UltiSnipsExpandTrigger="<c-e>"
-"     let g:UltiSnipsJumpForwardTrigger="<c-b>"
-"     let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-"     packadd ultisnips
-"     packadd vim-snippets
-"     call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
-"                 \ 'name': 'ultisnips',
-"                 \ 'whitelist': ['*'],
-"                 \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
-"                 \ }))
-" endif
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+
+let g:asyncomplete_remove_duplicates = 1
+let g:asyncomplete_smart_completion = 1
+let g:asyncomplete_buffer_clear_cache = 1
+
+
+call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
+    \ 'name': 'buffer',
+    \ 'whitelist': ['*'],
+    \ 'blacklist': ['go'],
+    \ 'completor': function('asyncomplete#sources#buffer#completor'),
+    \ 'config': {
+    \    'max_buffer_size': 500000,
+    \  },
+    \ }))
+
+call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
+    \ 'name': 'file',
+    \ 'whitelist': ['*'],
+    \ 'priority': 10,
+    \ 'completor': function('asyncomplete#sources#file#completor')
+    \ }))
+
+call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
+    \ 'name': 'omni',
+    \ 'whitelist': ['*'],
+    \ 'blacklist': ['c', 'cpp', 'html'],
+    \ 'completor': function('asyncomplete#sources#omni#completor')
+    \  }))
+
+if has('python3')
+    packadd ultisnips
+    packadd vim-snippets
+    packadd asyncomplete-ultisnips.vim
+
+    let g:UltiSnipsExpandTrigger="<c-e>"
+    let g:UltiSnipsJumpForwardTrigger="<c-b>"
+    let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+    " If you want :UltiSnipsEdit to split your window.
+    let g:UltiSnipsEditSplit="vertical"
+
+    call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
+        \ 'name': 'ultisnips',
+        \ 'whitelist': ['*'],
+        \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
+        \ }))
+endif
 " }}}
 
 " load/unload plugins installed as described below

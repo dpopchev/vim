@@ -221,7 +221,7 @@ set omnifunc=syntaxcomplete#Complete
 
 " make vim competition popup more intuitive
 " source http://vim.wikia.com/wiki/Make_Vim_completion_popup_menu_work_just_like_in_an_IDE
-set completeopt=menuone,popup,noinsert,noselect
+set completeopt=menuone,noinsert,noselect,preview
 
 " sample mapping configuration for pop up menu navigation {{{
 " " enter key selects the highlighted option as <C-y> does

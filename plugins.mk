@@ -46,6 +46,33 @@ PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/kshenoy/vim-signature.gi
 
 PLUGINS += syntastic
 PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/vim-syntastic/syntastic.git
+
+PLUGINS += vimperl
+PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/vim-perl/vim-perl.git
+
+PLUGINS += async
+PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/prabirshrestha/async.vim.git
+
+PLUGINS += asyncomplete
+PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/prabirshrestha/asyncomplete.vim.git
+
+PLUGINS += asyncompletebuffer
+PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/prabirshrestha/asyncomplete-buffer.vim.git
+
+PLUGINS += asyncompletefile
+PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/prabirshrestha/asyncomplete-file.vim.git
+
+PLUGINS += asyncompleteomni
+PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/yami-beta/asyncomplete-omni.vim.git
+
+PLUGINS += ultisnips
+PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/SirVer/ultisnips.git
+
+PLUGINS += vimsnippets
+PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/honza/vim-snippets.git
+
+PLUGINS += asyncompleteultisnips
+PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/prabirshrestha/asyncomplete-ultisnips.vim.git
 # must have end
 
 # colorshames
@@ -66,9 +93,4 @@ PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/crusoexia/vim-monokai.gi
 # colorshames end
 
 # experimental
-PLUGINS += vimperl
-PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/vim-perl/vim-perl.git
-
-PLUGINS += vdebug
-PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/vim-vdebug/vdebug.git
 # experimental end
