@@ -1,5 +1,5 @@
 " twiggle with gruvbox contrast settings, available are hard, soft and medium
-let g:gruvbox_contrast_dark = 'hard'
+let g:gruvbox_contrast_dark = 'medium'
 let g:gruvbox_contrast_light = 'medium'
 " manually specify background color -- available are dark and light
 set background=dark

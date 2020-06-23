@@ -176,23 +176,78 @@ vnoremap <leader>= :norm gvy<Esc>:Tab/<C-r>"<cr>
 " }}}
 
 " asyncomplete {{{
-autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+function! s:on_lsp_buffer_enabled() abort
+    setlocal omnifunc=lsp#complete
+    setlocal signcolumn=yes
+    if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+    nnoremap <buffer> gd <plug>(lsp-definition)
+    nnoremap <buffer> <f2> <plug>(lsp-rename)
+    " refer to doc to add more commands
+endfunction
 
+augroup lsp_install
+    au!
+    " call s:on_lsp_buffer_enabled only for languages that has the server registered.
+    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
+
+" let language server handle folding
+set foldmethod=expr
+  \ foldexpr=lsp#ui#vim#folding#foldexpr()
+  \ foldtext=lsp#ui#vim#folding#foldtext()
+" disable folding globally
+let g:lsp_fold_enabled = 0
+" disable diagnostics if other plugin will take care of it
+" let g:lsp_diagnostics_enabled = 0
+
+" Four groups of signs are defined and used: LspError, LspWarning, LspInformation, LspHint
+let g:lsp_signs_enabled = 1         " enable signs
+let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal mode
+let g:lsp_signs_error = {'text': '✗'}
+let g:lsp_signs_warning = {'text': '‼', 'icon': '/path/to/some/icon'} " icons require GUI
+let g:lsp_signs_hint = {'icon': '/path/to/some/other/icon'} " icons require GUI
+" requires gruvbox
+highlight link LspErrorText GruvboxRedSign
+highlight clear LspWarningLine
+
+" Highlight references to the symbol under the cursor
+let g:lsp_highlight_references_enabled = 1
+" To change the style of the highlighting, you can set or link the lspReference
+" highlight group, e.g.:
+" highlight lspReference ctermfg=red guifg=red ctermbg=green guibg=green
+
+" enable debugging
+" let g:lsp_log_verbose = 1
+" let g:lsp_log_file = expand('~/vim-lsp.log')
+"
+" " for asyncomplete.vim log
+" let g:asyncomplete_log_file = expand('~/asyncomplete.log')
+
+" packadd vim-lsp
+" packadd vim-lsp-settings
+
+let g:asyncomplete_auto_completeopt = 0
 let g:asyncomplete_remove_duplicates = 1
 let g:asyncomplete_smart_completion = 1
+
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+
+" packadd asyncomplete.vim
+" packadd asyncomplete-lsp.vim
+
+" packadd asyncomplete-buffer.vim
 let g:asyncomplete_buffer_clear_cache = 1
-
-
 call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
     \ 'name': 'buffer',
     \ 'whitelist': ['*'],
     \ 'blacklist': ['go'],
     \ 'completor': function('asyncomplete#sources#buffer#completor'),
     \ 'config': {
-    \    'max_buffer_size': 500000,
+    \    'max_buffer_size': 5000000,
     \  },
     \ }))
 
+" packadd asyncomplete-file.vim
 call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
     \ 'name': 'file',
     \ 'whitelist': ['*'],
@@ -200,6 +255,7 @@ call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
     \ 'completor': function('asyncomplete#sources#file#completor')
     \ }))
 
+" packadd asyncomplete-omni.vim
 call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
     \ 'name': 'omni',
     \ 'whitelist': ['*'],
@@ -207,16 +263,30 @@ call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
     \ 'completor': function('asyncomplete#sources#omni#completor')
     \  }))
 
+if executable('ctags')
+	packadd asyncomplete-tags.vim
+    packadd vim-gutentags
+	call asyncomplete#register_source(asyncomplete#sources#tags#get_source_options({
+		\ 'name': 'tags',
+		\ 'whitelist': ['Makefile','makefile','pl','pm','py'],
+		\ 'completor': function('asyncomplete#sources#tags#completor'),
+		\ 'config': {
+		\    'max_file_size': 50000000,
+		\  },
+		\ }))
+endif
+
 if has('python3')
+
+    let g:UltiSnipsExpandTrigger="<c-e>"
+    let g:UltiSnipsJumpForwardTrigger="<c-j>"
+    let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+    " If you want :UltiSnipsEdit to split your window.
+    let g:UltiSnipsEditSplit="vertical"
+
     packadd ultisnips
     packadd vim-snippets
     packadd asyncomplete-ultisnips.vim
-
-    let g:UltiSnipsExpandTrigger="<c-e>"
-    let g:UltiSnipsJumpForwardTrigger="<c-b>"
-    let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-    " If you want :UltiSnipsEdit to split your window.
-    let g:UltiSnipsEditSplit="vertical"
 
     call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
         \ 'name': 'ultisnips',

@@ -50,11 +50,17 @@ PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/vim-syntastic/syntastic.
 PLUGINS += vimperl
 PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/vim-perl/vim-perl.git
 
-PLUGINS += async
-PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/prabirshrestha/async.vim.git
+PLUGINS += asynclsp
+PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/prabirshrestha/vim-lsp.git
+
+PLUGINS += asynclspsettings
+PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/mattn/vim-lsp-settings.git
 
 PLUGINS += asyncomplete
 PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/prabirshrestha/asyncomplete.vim.git
+
+PLUGINS += asyncompletelsp
+PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/prabirshrestha/asyncomplete-lsp.vim.git
 
 PLUGINS += asyncompletebuffer
 PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/prabirshrestha/asyncomplete-buffer.vim.git
@@ -73,6 +79,12 @@ PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/honza/vim-snippets.git
 
 PLUGINS += asyncompleteultisnips
 PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/prabirshrestha/asyncomplete-ultisnips.vim.git
+
+PLUGINS += asyncompletetags
+PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/prabirshrestha/asyncomplete-tags.vim.git
+
+PLUGINS += vimgutentags
+PLUGIN_URL_$(lastword $(PLUGINS)) := https://github.com/ludovicchabant/vim-gutentags.git
 # must have end
 
 # colorshames
