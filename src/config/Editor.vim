@@ -192,6 +192,8 @@ noremap <silent> <C-j> :call DelEmptyLineBelow()<CR>
 noremap <silent> <C-k> :call DelEmptyLineAbove()<CR>
 noremap <silent> <C-j><C-j> :call AddEmptyLineBelow()<CR>
 noremap <silent> <C-k><C-k> :call AddEmptyLineAbove()<CR>
+
+noremap <leader>r i<cr><esc>
 " }}} end EDITOR
 
 " FOLDING {{{
