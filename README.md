@@ -1,4 +1,5 @@
 # vim config
+#  config
 
 The purpose of this project is to provide a nice and portable way of transferring
 vim configuration to various stations and keep them in sync to the latest
