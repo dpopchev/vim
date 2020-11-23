@@ -1,0 +1,24 @@
+.
+└── plugins
+    ├── opt
+    │   └── vim-buftabline
+    └── start
+        ├── badwolf
+        ├── commentary
+        ├── ctrlp.vim
+        ├── gruvbox
+        ├── indentLine
+        ├── lightline.vim
+        ├── molokai
+        ├── nerdtree
+        ├── vim-easy-align
+        ├── vim-gitbranch
+        ├── vim-gitgutter
+        ├── vim-monokai
+        ├── vim-perl
+        ├── vim-repeat
+        ├── vim-sleuth
+        ├── vim-surround
+        └── vim-visual-star-search
+
+21 directories

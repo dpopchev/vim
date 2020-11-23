@@ -527,9 +527,10 @@ augroup MarkdownIndentation
 augroup END
 
 " automatic indentation
-set autoindent  " should be enough
-set smartindent " seems deprecated, see below
-" set cindent   " seems powerful, see cino; all should be taken care by filetype
+set autoindent " should be enough
+set cindent    " seems powerful, see cino; all should be taken care by filetype
+set cinoptions+=(0
+set cinoptions+=(s
 
 " ==> search
 " resource https://vim.fandom.com/wiki/Searching
