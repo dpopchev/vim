@@ -1,0 +1,593 @@
+" => INIT
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ==> disable Vi-compatible
+if &compatible
+    set nocompatible
+endif
+
+silent! while 0
+    set nocompatible
+silent! endwhile
+
+" ==> disable modelines; https://medium.com/usevim/securing-vim-d6a12496fec8
+" set nomodeline
+
+" ==> auxiliary files
+let auxDump=[ $HOME."/.vim/tmp/", $HOME."/.tmp/", $HOME."/tmp/", "/tmp/" ]
+let &backupdir=join(auxDump, ",")  " store backup files
+let &dir=join(auxDump, ",")        " store swap files
+let &undodir=join(auxDump, ",")    " store undo files
+
+" ==> leader key
+" let mapleader='/' " default
+" let mapleader=',' " common alternative
+
+" ==> user warn function
+function! EchoWARN(WARN)
+    " general purpose function to echo warnings from functions
+
+    let WARN_msg    = toupper(a:WARN)
+    let WARN_prefix = " < < ==== "
+    let WARN_suffix = " ==== > > "
+
+    echom join([WARN_prefix, WARN_msg, WARN_suffix], " ")
+endfunction
+
+function! Preserve(command)
+    " Preparation: save last search, and cursor position.
+    let _s = @/
+    let l  = line(".")
+    let c  = col(".")
+    " Do the business:
+    execute a:command
+    " Clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
+endfunction
+
+" => PLUGINS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" NOTE: native vim 8 package support: https://shapeshed.com/vim-packages/
+
+" ==> built in
+filetype off
+syntax enable   " 'enable' keeps current color settings, 'on' will overrule them
+filetype plugin indent on
+
+" ==> gruvbox; https://github.com/morhetz/gruvbox/wiki/Configuration
+let g:gruvbox_contrast_dark    = 'medium'
+let g:gruvbox_contrast_light   = 'medium'
+let g:gruvbox_invert_selection = '0'
+
+" ==> molokai; https://github.com/tomasr/molokai
+let g:molokai_original = 0
+let g:rehash256        = 1
+
+" ==> monokai; https://github.com/crusoexia/vim-monokai
+let g:monokai_term_italic = 1
+let g:monokai_gui_italic  = 1
+
+" ==> badwolf; https://github.com/sjl/badwolf
+
+" ==> gitgutter; https://github.com/airblade/vim-gitgutter
+let g:gitgutter_map_keys = 0    " prevent gitgutter to apply any default mappings
+
+set updatetime=100
+let g:gitgutter_sign_added              = '+'
+let g:gitgutter_sign_modified           = '>'
+let g:gitgutter_sign_removed            = 'd'
+let g:gitgutter_sign_removed_first_line = '^'
+let g:gitgutter_sign_modified_removed   = '<'
+
+" Jump between hunks
+nmap <Leader>hn <Plug>(GitGutterNextHunk)
+nmap <Leader>hp <Plug>(GitGutterPrevHunk)
+
+" Hunk-add and hunk-revert for chunk staging
+nmap <Leader>hs <Plug>(GitGutterStageHunk)
+nmap <Leader>hu <Plug>(GitGutterUndoHunk)
+
+" preview hunk
+nmap <leader>hp <Plug>(GitGutterPreviewHunk)
+
+" ==> gitbranch; https://github.com/itchyny/vim-gitbranch
+
+" ==> lightline; https://github.com/itchyny/lightline.vim
+if !has('gui_running')
+    " force color; needed TERM=xterm-256color
+    set t_Co=256
+endif
+
+set laststatus=2    " needed to show lightline
+set noshowmode      " lightline already shows vim mode
+
+" integrate git gutter
+function! LightlineGitGutter()
+  if !get(g:, 'gitgutter_enabled', 0) || strlen(gitbranch#name()) == 0
+    return ''
+  endif
+  let [ l:added, l:modified, l:removed ] = GitGutterGetHunkSummary()
+  return printf('+%d ~%d -%d', l:added, l:modified, l:removed)
+endfunction
+
+" with integrated gutter and gitbranchname
+let g:lightline = {
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'githunks', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'gitbranch#name',
+      \   'githunks': 'LightlineGitGutter'
+      \ },
+      \ }
+
+" ==> easy-align; https://github.com/junegunn/vim-easy-align
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+
+" ==> vim visual star search; https://github.com/bronson/vim-visual-star-search
+
+" ==> commentary; https://github.com/tpope/vim-commentary
+
+" ==> vim-repeat; https://github.com/tpope/vim-repeat
+
+" ==> vim-surround; https://github.com/tpope/vim-surround.git
+" to change "" to '' do cs"'
+" it works with tags cs'<q>
+" also can do cst"
+" to remove ds"
+" to surround only a word, place cursor on it and ysiw]
+" to wrap an entire line yss) or yss( to give spacing
+
+" ==> indentLine; https://github.com/Yggdroot/indentLine.git
+" each level with separate char
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+
+" ==>  ctrlp.vim; https://github.com/ctrlpvim/ctrlp.vim
+
+" ==> nerdtree; https://github.com/preservim/nerdtree.git
+nnoremap <leader>t :NERDTreeToggle<cr>
+" in case I want to switch
+let g:NERDTreeDirArrowExpandable  = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+" fuzzy search files
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.tar*,*.rar     " MacOSX/Linux
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+
+" ==> buftabline; https://github.com/ap/vim-buftabline
+if !&diff
+    packadd vim-buftabline
+    set hidden
+    nnoremap [b :bprev<CR>
+    nnoremap ]b :bnext<CR>
+    nnoremap <leader>bd :bdelete<CR>
+    nnoremap <leader>bb :ls<CR>
+endif
+
+" ==> perl support
+
+" => LOOK AND FEEL
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ==> colorscheme
+" manually specify background color -- available are dark and light
+set background=dark
+" set background=light
+
+" list of all plugged in colo
+" let colo_def      = 'gruvbox'   " set default colorscheme
+let colo_def      = 'molokai'   " set default colorscheme
+" let colo_def      = 'monokai'   " set default colorscheme
+" let colo_def      = 'badwolf'   " set default colorscheme
+let colo_fallback = 'desert'    " set fallback colorscheme
+
+try
+    " try setting the default colorscheme
+    exe "colorscheme " . colo_def
+catch /^Vim\%((\a\+)\)\=:E185/
+    " if it fails try the fallback one
+    :call EchoWARN("colorscheme not found " . colo_def)
+    :call EchoWARN("will try with fallback: " . colo_fallback)
+    exe "colorscheme " . colo_fallback
+endtry
+
+if exists('+termguicolors')
+    " prevent colors to break in terminal; https://github.com/vim/vim/issues/993
+    let &t_8f = '\<Esc>[38;2;%lu;%lu;%lum'
+    let &t_8b = '\<Esc>[38;2;%lu;%lu;%lum'
+endif
+
+set lazyredraw      " dont update screen during macro and script execution
+set ttyfast         " improves redrawing on newer computers
+" set t_ut=            " fix highlight problem on win 10 wls
+" set t_BE=            " remove extra characters when shift+insert
+
+" ==> syntax highlight
+" Always highlight from file start to prevent syntax highlight break
+let prevent_syntax_highlight_break = 0
+
+augroup HighlightFromFileStart
+    autocmd!
+augroup END
+
+if prevent_syntax_highlight_break
+    autocmd VimEnter * echom 'syntax sync from start enabled'
+
+    autocmd HighlightFromFileStart BufEnter * :syntax sync fromstart
+endif
+
+" ==> cursorline
+let underline_cursorline_fix = 0
+
+augroup HackCursorlineWhenUnderline
+    autocmd!
+augroup END
+
+if underline_cursorline_fix
+    autocmd VimEnter * echom 'cursorline underline hack'
+    
+    autocmd HackCursorlineWhenUnderline WinEnter * setlocal cursorline
+    autocmd HackCursorlineWhenUnderline WinEnter * setlocal nocursorline
+    highlight cursorline cterm=none term=none
+    highlight CursorLine guibg=#303000 ctermbg=233
+    highlight Visual cterm=reverse ctermfg=NONE
+else
+    set cursorline  " highlichg current line via colorscheme
+endif
+
+" ==> status line
+if &runtimepath !~# 'lightline'
+    " in case lightline not loaded use status line below
+    " source: https://shapeshed.com/vim-statuslines/
+    
+    " leave trace in messages
+    autocmd VimEnter * echom 'no statusline plugin detected; using handmade one'
+    
+    function! GitBranch()
+        return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+    endfunction
+    
+    function! StatuslineGit()
+        let l:branchname = GitBranch()
+        return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
+    endfunction
+    
+    set showmode        " show vim mode
+    
+    " setup statusline
+    set statusline=
+    set statusline+=%#PmenuSel#
+    set statusline+=%{StatuslineGit()}
+    set statusline+=%#LineNr#
+    set statusline+=\ %f
+    set statusline+=%m\
+    set statusline+=%=
+    set statusline+=%#CursorColumn#
+    set statusline+=\ %y
+    set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
+    set statusline+=\[%{&fileformat}\]
+    set statusline+=\ %p%%
+    set statusline+=\ %l:%c
+    set statusline+=\
+endif
+
+set laststatus=2        " always display status line
+set noruler             " do not display cursor position
+
+" ==> command line
+set showcmd             " show command in last line of the screen
+set cmdheight=2     " command line height in screen lines
+set wildmenu            " shown possible matches just above command line
+
+" ==> window title
+set title               " set window title to opened file
+
+" ==> error feedback
+set noerrorbells        " disable beep on erros
+set novisualbell        " disable flash the screen instead of beeping on errors
+
+" ==> mouse
+set mouse=n             " enable mouse only in normal mode
+
+" ==> timeout of mappings/keycodes
+" set timeout timeoutlen=500 ttimeoutlen=500
+
+" ==> disable built in K
+noremap <S-k> <Nop>
+
+" ==> line numbering
+let alternate_numbering = 0
+
+augroup ChangeNumberingInsertMode
+    autocmd!
+augroup END
+
+if alternate_numbering
+    autocmd ChangeNumberingInsertMode InsertEnter * :set number
+    autocmd ChangeNumberingInsertMode InsertLeave * :set relativenumber
+else
+    set number
+    set relativenumber
+endif
+
+" ==> lines to keep visible
+set scrolloff=3         " amount of lines to keep above and below cursor
+set sidescrolloff=3     " amount of screen columns to keep to the right
+
+" ==> encoding
+set encoding=utf-8      " default encoding if none specified for the file
+
+" ==> text formatting
+let textThreshold=80             " set desired text width
+let &textwidth=textThreshold     " maximum allowed width of a line
+let &colorcolumn=textThreshold+1 " set text length marker
+
+set nowrap    " disable line wrap
+set linebreak " avoid wrapping a line in middle of a word
+
+" filetype plugins are overriding formatoptions, which is annoying;
+" I want the one below applied for all filetypes;
+" source: https://stackoverflow.com/questions/28375119/override-options-set-by-ftplugins-in-vim
+augroup ForceOverwriteFO
+    autocmd!
+    autocmd FileType * setlocal formatoptions=tcrqbj
+augroup END
+
+set display=lastline    " display as much as possible of a line
+    
+" trim trailing spaces and blank lines at end of the file
+augroup TrimBlanks
+    autocmd!
+    autocmd BufWritePre * call Preserve("%s/\\S\\zs\ \\+$//e")
+    autocmd BufWritePre * call Preserve("%s/\\S\\zs\t\\+$//e")
+    autocmd BufWritePre * call Preserve("%s#\\($\\n\\s\*\\)\\+\\%$##e")
+augroup END
+     
+" ==> system clipboard; https://vim.fandom.com/wiki/Accessing_the_system_clipboard
+function! CopyToClipboard()
+    " https://stackoverflow.com/questions/1533565/how-to-get-visually-selected-text-in-vimscript/1534347#1534347
+
+    if has('clipboard')
+        "if support is compiled,  yank visually selected text to "+
+        normal! "+y
+    else
+        call EchoWARN("check vim clipboard support")
+    endif
+endfunction
+
+vnoremap <C-c> :call CopyToClipboard()<cr>
+
+" ==> add/del empty lines; https://vim.fandom.com/wiki/Quickly_adding_and_deleting_empty_lines
+function! AddEmptyLineBelow()
+    call append(line("."), "")
+endfunction
+
+function! AddEmptyLineAbove()
+    let l:scrolloffsave = &scrolloff
+    " Avoid jerky scrolling with ^E at top of window
+    set scrolloff=0
+    call append(line(".") - 1, "")
+    if winline() != winheight(0)
+        silent normal! <C-e>
+    end
+    let &scrolloff = l:scrolloffsave
+endfunction
+
+function! DelEmptyLineBelow()
+    if line(".") == line("$")
+        return
+    end
+    let l:line = getline(line(".") + 1)
+    if l:line =~ '^\s*$'
+        let l:colsave = col(".")
+        .+1d
+        ''
+        call cursor(line("."), l:colsave)
+    end
+endfunction
+
+function! DelEmptyLineAbove()
+    if line(".") == 1
+        return
+    end
+    let l:line = getline(line(".") - 1)
+    if l:line =~ '^\s*$'
+        let l:colsave = col(".")
+        .-1d
+        silent normal! <C-y>
+        call cursor(line("."), l:colsave)
+    end
+endfunction
+
+" delete/add blank line below/above, and double -- inserts them.
+noremap jj :call DelEmptyLineBelow()<CR>
+noremap kk :call DelEmptyLineAbove()<CR>
+noremap <C-j><C-j> :call AddEmptyLineBelow()<CR>
+noremap <C-k><C-k> :call AddEmptyLineAbove()<CR>
+
+" ==> bracket matching
+set showmatch           " highlight matching brackets
+" set matchtime=5       " tenths of a second to show matching bracket parent
+" set matchpairs+=<:>   " extend match pairs with < and >
+
+" ==> sane backspace; https://vim.fandom.com/wiki/Backspace_and_delete_problems
+set backspace=2
+
+" ==> auto re-read file
+set autoread
+
+" ==> confirm unsaved files
+set confirm
+
+" ==> increase command line history
+set history=500
+
+" ==> warn if U is pressed
+nnoremap U :call EchoWARN("check caps lock")<CR>
+
+" ==> leader save/quit
+nnoremap <leader>q :q<cr>
+nnoremap <leader>w :w<cr>
+
+" ==> paste mode
+nnoremap ++ :set invpaste<cr>
+
+" ==> visual shift
+vnoremap < <gv
+vnoremap > >gv
+
+" ==> visual guides for blank characters
+"set list listchars=tab:»-,trail:·,extends:»,precedes:«
+set list listchars=tab:❘-,trail:·,extends:»,precedes:«,nbsp:×
+
+" ==> press 'q' to exit help buffer
+augroup QtoExitHelpBuffer
+    autocmd!
+    autocmd FileType help noremap <buffer>q :q<cr>
+augroup END
+
+" ==> leader insert character under cursor
+noremap <leader>r i<cr><esc>
+noremap <leader><space> i<space><esc>
+
+" ==> leader p register access
+vnoremap <leader>y "py
+vnoremap <leader>p "pp
+nnoremap <leader>p "pp
+
+" ==> fold
+" folding cheat sheet
+"   zc/o/a      close/open/toggle fold if the cursor is on one
+"   zC/O/A      close/open/toggle all fold levels around the cursor
+"   zr/m        reduce/increasing folding by opening/closing one more fold level
+"   zR/M        reduce/increasing folding by opening/closing one more fold level at all buffer
+"   zf#j/k      create fold from cursor down/up # number of lines
+"   zj/k        move cursor to next fold down/up
+"   zo/O        open fold/all folds at the cursor
+"set nofoldenable     " disable folding
+set foldenable        " enable folding
+set foldmethod=indent " fold is based on indent level
+set foldcolumn=0      " sidebar indicating folding
+set foldlevel=3       " folds with higher level will be closed
+set foldnestmax=10    " maximum nesting of folds
+set foldlevelstart=3  " starting fold level when buffer is opened
+
+" ==> completion
+set complete+=kspell    " use currently active spell checking
+set completeopt=menuone,preview,noselect
+
+" robust omnifunc solution, source ft-syntax-omni
+if has("autocmd") && exists("+omnifunc")
+    autocmd Filetype *
+                \ if &omnifunc == "" |
+                \     setlocal omnifunc=syntaxcomplete#Complete |
+                \ endif
+endif
+
+" ==> spell
+"   move to misspelled words via            ]s and [s
+"   change word under cursor via            z=
+"   add word under cursor to dictionary     zg
+"   remove word from dictionary via         zw
+set spell          " enable spellcheck
+set spelllang=en   " spellcheck language
+"set spellfile=... " place to store additional words
+
+hi clear SpellBad
+hi SpellBad cterm=underline
+hi clear SpellRare
+hi SpellRare cterm=underline
+hi clear SpellCap
+hi SpellCap cterm=none
+hi clear SpellLocal
+hi SpellLocal cterm=underline
+
+" ==> indent
+" resource https://vim.fandom.com/wiki/Indenting_source_code
+" set amount of spaces for indentation
+let b:indent=4
+
+" indentation without hard tabs
+set expandtab             " convert tabs to 'softtabstop' amount of spaces
+let &shiftwidth=b:indent  " affects when pressing >>, << or == and auto indentation
+let &softtabstop=b:indent " affects <TAB> or <BS>;
+" let &tabstop=b:indent   " not recommended as may alter view of other editors
+
+" markdown recognizes code blocks with triple backticks and 5 space indentation
+" prevent the later by overwriting the indent value
+augroup MarkdownIndentation
+    autocmd!
+    autocmd FileType markdown setlocal shiftwidth=2 softtabstop=0 tabstop=2
+augroup END
+
+" automatic indentation
+set autoindent  " should be enough
+set smartindent " seems deprecated, see below
+" set cindent   " seems powerful, see cino; all should be taken care by filetype
+
+" ==> search
+" resource https://vim.fandom.com/wiki/Searching
+set hlsearch    " enable search highlighting
+set incsearch   " incremental search that shows partial matches
+set ignorecase  " ignore case when searching
+set smartcase   " automatically switch to case-sensitive when search
+set magic       " for regular expressions turn magic on
+
+nnoremap <leader><leader> <Esc>:nohlsearch<CR><Esc>
+
+" ==> diff
+if &diff
+    " diff mode ignore white spaces
+    set diffopt+=iwhite
+
+    " put/obtain line cursor is on
+    nnoremap <leader>dp V:diffput<cr>
+    nnoremap <leader>do V:diffget<cr>
+    vnoremap <leader>dp <esc>gv:diffput<cr>
+    vnoremap <leader>do <esc>gv:diffget<cr>
+
+    " undo the other, inactive window
+    nnoremap <leader>du :wincmd w<cr>:normal u<cr>:wincmd w<cr>
+
+    " recalculate differences
+    nnoremap <leader>dr :diffupdate<cr>
+endif
+
+" ==> make/build/compile/run/lint/test/autoformat per file type
+augroup Make
+    autocmd!
+augroup END
+
+augroup Build
+    autocmd!
+augroup END
+
+augroup Compile
+    autocmd!
+    autocmd FileType perl nnoremap m<cr> :!clear && perl -c %<cr>
+augroup END
+
+augroup Run
+    autocmd!
+    autocmd FileType perl nnoremap mr :!clear && perl -Ilib %<cr>
+augroup END
+
+augroup Lint
+    autocmd!
+    autocmd FileType perl nnoremap ml :!clear && perlcritic -3 %<cr>
+augroup END
+
+augroup Test
+    autocmd!
+augroup END
+
+augroup Autoformat
+    autocmd!
+    autocmd FileType perl nnoremap ma :!clear && perltidy -b % <cr>
+augroup END
