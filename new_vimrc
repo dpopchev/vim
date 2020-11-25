@@ -51,19 +51,16 @@ syntax enable   " 'enable' keeps current color settings, 'on' will overrule them
 filetype plugin indent on
 
 " ==> gruvbox; https://github.com/morhetz/gruvbox/wiki/Configuration
-let g:gruvbox_contrast_dark    = 'medium'
-let g:gruvbox_contrast_light   = 'medium'
-let g:gruvbox_invert_selection = '0'
+let g:gruvbox_contrast_dark      = 'medium'
+let g:gruvbox_contrast_light     = 'medium'
+let g:gruvbox_bold               = 1
+let g:gruvbox_italic             = 0
+let g:gruvbox_italicize_comments = 0
+let g:gruvbox_invert_selection   = 1
 
 " ==> molokai; https://github.com/tomasr/molokai
-let g:molokai_original = 0
-let g:rehash256        = 1
-
-" ==> monokai; https://github.com/crusoexia/vim-monokai
-let g:monokai_term_italic = 1
-let g:monokai_gui_italic  = 1
-
-" ==> badwolf; https://github.com/sjl/badwolf
+let g:molokai_original = 1
+let g:rehash256        = 0
 
 " ==> gitgutter; https://github.com/airblade/vim-gitgutter
 let g:gitgutter_map_keys = 0    " prevent gitgutter to apply any default mappings
@@ -178,10 +175,8 @@ set background=dark
 " set background=light
 
 " list of all plugged in colo
-" let colo_def      = 'gruvbox'   " set default colorscheme
-let colo_def      = 'molokai'   " set default colorscheme
-" let colo_def      = 'monokai'   " set default colorscheme
-" let colo_def      = 'badwolf'   " set default colorscheme
+let colo_def      = 'gruvbox'   " set default colorscheme
+" let colo_def      = 'molokai'   " set default colorscheme
 let colo_fallback = 'desert'    " set fallback colorscheme
 
 try
@@ -193,6 +188,9 @@ catch /^Vim\%((\a\+)\)\=:E185/
     :call EchoWARN("will try with fallback: " . colo_fallback)
     exe "colorscheme " . colo_fallback
 endtry
+
+" in case colorscheme visual selection not on par
+" highlight Visual term=reverse cterm=reverse ctermfg=NONE guibg=Grey
 
 if exists('+termguicolors')
     " prevent colors to break in terminal; https://github.com/vim/vim/issues/993
