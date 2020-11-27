@@ -6,7 +6,8 @@ if &compatible
 endif
 
 " ==> disable modelines; https://medium.com/usevim/securing-vim-d6a12496fec8
-" set nomodeline
+set nomodeline
+set secure
 
 " ==> auxiliary files
 let auxDump=[ $HOME."/.vim/tmp/", $HOME."/.tmp/", $HOME."/tmp/", "/tmp/" ]
@@ -17,6 +18,10 @@ let &undodir=join(auxDump, ",")    " store undo files
 " ==> leader key
 " let mapleader='/' " default
 " let mapleader=',' " common alternative
+
+" force load of python3 first; https://robertbasic.com/blog/force-python-version-in-vim/
+if has('python3')
+endif
 
 " ==> user warn function
 function! EchoWARN(WARN)
@@ -45,6 +50,9 @@ endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " NOTE: native vim 8 package support: https://shapeshed.com/vim-packages/
 
+let g:vdebug_options = {}
+let g:vdebug_options["port"] = 9000
+
 " ==> built in
 filetype off
 syntax enable   " 'enable' keeps current color settings, 'on' will overrule them
@@ -56,7 +64,7 @@ let g:gruvbox_contrast_light     = 'medium'
 let g:gruvbox_bold               = 1
 let g:gruvbox_italic             = 0
 let g:gruvbox_italicize_comments = 0
-let g:gruvbox_invert_selection   = 1
+let g:gruvbox_invert_selection   = 0
 
 " ==> molokai; https://github.com/tomasr/molokai
 let g:molokai_original = 1
@@ -166,6 +174,15 @@ if !&diff
 endif
 
 " ==> perl support
+
+" ==> vim-sneak
+let g:sneak#label = 1
+
+" ==> https://github.com/honza/vim-snippets
+" ==> ultisnips; https://github.com/SirVer/ultisnips
+" let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " => LOOK AND FEEL
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -529,8 +546,9 @@ augroup MarkdownIndentation
 augroup END
 
 " automatic indentation
-set autoindent  " should be enough
-set cindent     " seems powerful, see cino; all should be taken care by filetype
+set nosmartindent " just in case
+set autoindent    " should be enough
+set cindent       " seems powerful, see cino; all should be taken care by filetype
 set cinoptions+=(0
 set cinoptions+=(s
 " stop indent removal
@@ -548,6 +566,25 @@ set smartcase   " automatically switch to case-sensitive when search
 set magic       " for regular expressions turn magic on
 
 nnoremap <leader><leader> <Esc>:nohlsearch<CR><Esc>
+
+" ==> split
+" cheatsheet
+" ctrl + w _ " Max out the height of the current split
+" ctrl + w | "Max out the width of the current split
+" ctrl + w = "Normalize all split sizes, which is very handy when resizing terminal
+" Ctrl+W R "Swap top/bottom or left/right split
+" Ctrl+W T "Break out current window into a new tabview
+" Ctrl+W o "Close every window in the current tabview but the current one
+
+set splitbelow
+set splitright
+
+nnoremap <expr> <C-W><C-S> ":".winheight(0)/3."split\<CR>"
+
+" nnoremap <C-J> <C-W><C-J>
+" nnoremap <C-K> <C-W><C-K>
+" nnoremap <C-L> <C-W><C-L>
+" nnoremap <C-H> <C-W><C-H>
 
 " ==> diff
 if &diff
@@ -586,6 +623,11 @@ augroup Run
     autocmd FileType perl nnoremap mr :setlocal makeprg=perl\ -Ilib\ %<bar>silent make<bar>redraw!<bar>copen<cr>
 augroup END
 
+augroup RunDebugger
+    autocmd!
+    autocmd FileType perl nnoremap mR :!clear && perl -Ilib -d:ptkdb %<cr>
+augroup END
+
 augroup Lint
     autocmd!
     autocmd FileType perl nnoremap ml :setlocal makeprg=perlcritic\ -4\ %<bar>silent make<bar>redraw!<bar>copen<cr>
@@ -598,4 +640,11 @@ augroup END
 augroup Autoformat
     autocmd!
     autocmd FileType perl nnoremap ma :!clear && perltidy -b % && rm -f %.bak <cr> :redraw! <cr>
+augroup END
+
+" ==> templates
+augroup templates
+    autocmd!
+    autocmd BufNewFile *.pl,*.pm, 0r ~/.vim/templates/skeleton.pl
+    autocmd BufNewFile *.t 0r ~/.vim/templates/skeleton.t
 augroup END
