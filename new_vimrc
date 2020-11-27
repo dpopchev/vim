@@ -170,7 +170,7 @@ if !&diff
     nnoremap [b :bprev<CR>
     nnoremap ]b :bnext<CR>
     nnoremap <leader>bd :bdelete<CR>
-    nnoremap <leader>bb :ls<CR>
+    nnoremap <Leader>b :ls<CR>:b
 endif
 
 " ==> perl support
