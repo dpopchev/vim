@@ -315,6 +315,8 @@ set mouse=n             " enable mouse only in normal mode
 
 " ==> timeout of mappings/keycodes
 " set timeout timeoutlen=500 ttimeoutlen=500
+" https://github.com/vim/vim/issues/24
+set timeout timeoutlen=5000 ttimeoutlen=100
 
 " ==> disable built in K
 noremap <S-k> <Nop>
