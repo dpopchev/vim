@@ -178,6 +178,18 @@ let g:goyo_margin_bottom = 0
 
 nnoremap <leader>e :Goyo<cr>
 
+" ==> vim-illuminate
+let g:Illuminate_delay = 250
+let g:Illuminate_highlightUnderCursor = 1
+nnoremap z/ :IlluminationToggle<cr>
+" NOTE: has extensive blocklist capabilities
+" let g:Illuminate_ftblacklist = ['nerdtree']
+augroup illuminate_augroup
+    autocmd!
+    autocmd VimEnter * hi illuminatedWord cterm=bold,underline
+    autocmd! User GoyoLeave nested hi illuminatedWord cterm=bold,underline
+augroup END
+
 " => LOOK AND FEEL
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ==> colorscheme
