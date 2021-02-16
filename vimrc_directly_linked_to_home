@@ -647,7 +647,7 @@ nnoremap MR :silent make debug <bar>redraw!<bar>copen<cr>
 " ==> templates
 augroup templates
     autocmd!
-    let s:templateFileTypes = ['*.pl', '*.pm', '*.t']
+    let s:templateFileTypes = ['*.pl', '*.pm', '*.t', '*.pod', '*.mk', '*.mdreadme', '*.mdbeamer']
     execute 'autocmd BufRead '.join(s:templateFileTypes,',').' call s:ApplyTemplateRead()'
     execute 'autocmd BufNewFile '.join(s:templateFileTypes,',').' call s:ApplyTemplateNewFile()'
 
