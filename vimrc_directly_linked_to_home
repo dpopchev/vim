@@ -598,7 +598,7 @@ nnoremap <leader><leader> <Esc>:nohlsearch<CR><Esc>
 set splitbelow
 set splitright
 
-nnoremap <expr> <C-W><C-S> ":".winheight(0)/3."split\<CR>"
+nnoremap <expr> <C-W><C-S> ":".winheight(0)/5."split\<CR>"
 
 " nnoremap <C-J> <C-W><C-J>
 " nnoremap <C-K> <C-W><C-K>
