@@ -612,6 +612,9 @@ nnoremap ]b :bnext<CR>
 nnoremap <leader>bd :bdelete<CR>
 nnoremap <Leader>bb :ls<CR>:b
 
+" ==> attempt to clean up most syntax highlighting problems
+nnoremap gzz :<Esc>:syntax sync fromstart<CR>
+
 " ==> diff
 if &diff
     " diff mode ignore white spaces
