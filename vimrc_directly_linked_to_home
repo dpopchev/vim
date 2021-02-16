@@ -633,43 +633,16 @@ if &diff
     nnoremap <leader>dr :diffupdate<cr>
 endif
 
-" ==> make/build/compile/run/lint/test/autoformat per file type
-augroup Make
-    autocmd!
-augroup END
-
-augroup Build
-    autocmd!
-augroup END
-
-augroup Compile
-    autocmd!
-    autocmd FileType perl nnoremap m<cr> :setlocal makeprg=perl\ -c\ %<bar>silent make<bar>redraw!<bar>copen<cr>
-augroup END
-
-augroup Run
-    autocmd!
-    autocmd FileType perl nnoremap mr :setlocal makeprg=perl\ -Ilib\ %<bar>silent make<bar>redraw!<bar>copen<cr>
-augroup END
-
-augroup RunDebugger
-    autocmd!
-    autocmd FileType perl nnoremap mR :!clear && perl -Ilib -d:ptkdb %<cr>
-augroup END
-
-augroup Lint
-    autocmd!
-    autocmd FileType perl nnoremap ml :setlocal makeprg=perlcritic\ -4\ %<bar>silent make<bar>redraw!<bar>copen<cr>
-augroup END
-
-augroup Test
-    autocmd!
-augroup END
-
-augroup Autoformat
-    autocmd!
-    autocmd FileType perl nnoremap ma :!clear && perltidy -b % && rm -f %.bak <cr> :redraw! <cr>
-augroup END
+" ==> make/build/compile/run/lint/test/autoformat Makefile shortcuts
+nnoremap m<cr> :silent make compile FILE=%<bar>redraw!<bar>copen<cr>
+nnoremap M<cr> :silent make lint FILE=%<bar>redraw!<bar>copen<cr>
+nnoremap m<cr><cr> :silent make aformat FILE=%<bar>redraw!<cr>
+nnoremap mr :silent make exec FILE=%<bar>redraw!<bar>copen<cr>
+nnoremap mR :silent make debug_file FILE=%<bar>redraw!<bar>copen<cr>
+nnoremap mt :silent make test <bar>redraw!<bar>copen<cr>
+nnoremap mT :silent make build <bar>redraw!<bar>copen<cr>
+nnoremap Mr :silent make run <bar>redraw!<bar>copen<cr>
+nnoremap MR :silent make debug <bar>redraw!<bar>copen<cr>
 
 " ==> templates
 augroup templates
