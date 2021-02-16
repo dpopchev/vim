@@ -164,16 +164,6 @@ let g:ctrlp_custom_ignore = {
             \ }
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
-" ==> buftabline; https://github.com/ap/vim-buftabline
-if !&diff
-    packadd vim-buftabline
-    set hidden
-    nnoremap [b :bprev<CR>
-    nnoremap ]b :bnext<CR>
-    nnoremap <leader>bd :bdelete<CR>
-    nnoremap <Leader>bb :ls<CR>:b
-endif
-
 " ==> perl support
 
 " ==> vim-sneak
