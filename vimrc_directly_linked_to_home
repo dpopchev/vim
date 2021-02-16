@@ -664,10 +664,10 @@ augroup templates
     endfun
 augroup END
 
+" note call function as ApplyTemplate TemplateName
 command! -bar -nargs=1 ApplyTemplate call ApplyTemplateOnDemand(<q-args>)
 function! ApplyTemplateOnDemand(ftype)
-    let s:templateMatchFileType = { 'perl': 'pl' }
+    let s:templateMatchFileType = { 'perl': 'pl', 'make': 'mk', 'makefile': 'mk', 'markdown': 'md' }
     execute '0r ~/.vim/templates/skeleton.' . s:templateMatchFileType[a:ftype]
     let &filetype=a:ftype
 endfun
-" pointelss comment
