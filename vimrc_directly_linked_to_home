@@ -559,9 +559,9 @@ inoremap <S-tab> <C-R>=InsertHalfShiftwidth()<cr>
 
 " markdown recognizes code blocks with triple backticks and 5 space indentation
 " prevent the later by overwriting the indent value
-augroup MarkdownIndentation
+augroup MarkdownCommentaryString
     autocmd!
-    autocmd FileType markdown setlocal shiftwidth=2 softtabstop=0 tabstop=2
+    autocmd FileType markdown setlocal commentstring=<!--\ %s\ -->
 augroup END
 
 " automatic indentation
