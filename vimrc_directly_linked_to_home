@@ -475,11 +475,7 @@ augroup END
 " ==> leader insert character under cursor
 noremap <leader>r i<cr><esc>
 noremap <leader><space> i<space><esc>
-
-" ==> leader p register access
-vnoremap <leader>y "py
-vnoremap <leader>p "pp
-nnoremap <leader>p "pp
+noremap <leader><space><space> a<space><esc>
 
 " ==> fold
 " folding cheat sheet
