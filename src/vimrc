@@ -223,7 +223,7 @@ endif
 
 set lazyredraw      " dont update screen during macro and script execution
 set ttyfast         " improves redrawing on newer computers
-" set t_ut=            " fix highlight problem on win 10 wls
+set t_ut=            " fix highlight problem on win 10 wls
 " set t_BE=            " remove extra characters when shift+insert
 
 " ==> syntax highlight
