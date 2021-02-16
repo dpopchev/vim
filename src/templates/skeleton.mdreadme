@@ -1,0 +1,254 @@
+# Project name
+
+Highlight of the project goal/mission and so on.
+
+> This is a markdown template for nice README following the POD structure.
+> It also can be used as quick reference.
+
+# Synopsis
+
+Very brief and short of the project, best with basic example, as shown below
+
+> Markdown is lightweight markup language for creating formatted text using plain
+> text editor. This is a paragraph. Sample text emphasis can be found in the list
+> below:
+>
+> - Emphasis, aka italics, with *asterisks* or _underscores_.
+> - Strong emphasis, aka bold, with **asterisks** or __underscores__.
+> - Combined emphasis with **asterisks and _underscores_**.
+> - Strikethrough uses two tildes. ~~Scratch this.~~
+>
+> `pandoc` integration
+>
+> - to pdf `pandoc source_file.md -o converted_file.pdf`
+> - specify code highlighting `pandoc source_file.md --highlight-style STYLE converted_file.pdf`
+>
+>     where `STYLE` can be any of the following keywords: pygments, kate,
+>     monochrome, espresso, haddock, tango, zenburn
+>
+>     my preference is **zenburn**
+
+# Description
+
+Here is the place for further details:
+
+This is a template to follow when creating an README. It also serve the purpose
+of cheatsheet.
+
+Paragraphs are a building block of the text. To form such with markdown just
+write continues text without new lines as in here. Below will follow new
+paragraph.
+
+Here it starts. The tricky part when working with paragraphs is when you want
+to keep indentation w.r.t. list. As rule of thumb, unless paragraphs are inside
+list, they should start at the beginning of the line.
+
+Now observe paragraphs indented w.r.t. list.
+
+1. ordered list starts here
+1. and continues with second item
+    
+    now observe paragraph following indentation and longer text to form a
+    paragraph and then unexpectadly
+
+    a new sentence
+
+1. and now we have it following the enumeration
+    1. nest the item
+        
+        and add an paragraph with longer text which will be formatted as
+        expected
+        
+    1. continue nexted sub list
+1. finish them all
+
+## Common markups
+
+### headings
+
+Achieve with simple `#` in front of the word. The more hashtags the smaller the
+heading.
+
+*Best practice:* for compatibility reasons separate the hashtag and word with
+space.
+
+```
+# The huges heading possible
+
+## Smaller, but a little bit
+
+### Even further, etc.
+```
+
+### paragraphs
+
+They are formed with continues text eventually separated with new line `\n` at
+the source. This is an example. Now observe start of new paragraph. Next
+sentence and this separated with single blank line, but adding more would have
+the same effect.
+
+Here it starts. In case someone needs a line break it can be achieved in several
+ways, but anyway follow the recommendation\
+*Best practice:* for compatibility from all implementations do it with `<br>`
+tag
+
+```
+They are formed with continues text eventually separated with new line `\n` at
+the source. This is an example. Now observe start of new paragraph. Next
+sentence and this separated with single blank line, but adding more would have
+the same effect.
+
+Here it starts. In case someone needs a line break it can be achieved in several
+ways, but anyway follow the recommendation\
+*Best practice:* for compatibility from all implementations do it with `<br>`
+tag
+```
+
+**Note:** `<br>` is the recommend way, but in our case `\` only worked...
+
+### emphasis
+
+*Best practice:*
+
+- surround with `*` for *italic*
+- surround with `**` for **bold**
+
+### blockquotes
+
+> Place `>` in front of the paragraph to achieve block quote.
+>
+> Keep pre appending it in front of every line/sentence, that should be part of
+> the block quute.
+>
+> Nesting should also be possible by by placing `>>`, but not with all...
+
+### lists
+
+*Best practice:* do not mix the symbols, prefer `-` for unordered and `1.` for
+ordered
+
+### code blocks
+
+Indent with tab/four spaces, or if in list, than double -- two tabs/eight
+spaces.
+
+Inline code, but often used to denote word and phrase, surround with backtics.
+
+``Use `code` in your Markdown file.``
+
+You can also escape code with
+
+```bash
+echo "Here we have escaped a bash command by impling highlight"
+```
+
+### horizontal rules
+
+*Best practice:*
+
+---
+
+```
+*Best practice:*
+
+---
+
+```
+
+### links, url, mail
+
+My favorite markdown resource is is [basic syntax](https://www.markdownguide.org/basic-syntax/ "text shown if mouse hover").
+
+<https://www.markdownguide.org>
+<fake@example.com>
+
+```
+My favorite markdown resource is is [basic syntax](https://www.markdownguide.org/basic-syntax/ "text shown if mouse hover").
+
+<https://www.markdownguide.org>
+<fake@example.com>
+```
+
+### images
+
+- as file path `![alt text](path/to/img "hover text")`
+- as link `[![alt text](path/to/img "hover text")](http:/link/)`
+
+### escaping characters
+
+This is done wiht `\`, as in \*. Characters needing escape are \\, \`, \*, \_,
+\{\}, \[\], \<\>, \(\), \#, \+, \., \!, \|.
+
+### tables
+
+Colons can be used to align columns.
+
+| Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 |
+| zebra stripes | are neat      |    $1 |
+
+There must be at least 3 dashes separating each header cell.
+The outer pipes (|) are optional, and you don't need to make the
+raw Markdown line up prettily. You can also use inline Markdown.
+
+Markdown | Less | Pretty
+--- | --- | ---
+*Still* | `renders` | **nicely**
+1 | 2 | 3
+
+```
+Colons can be used to align columns.
+
+| Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 |
+| zebra stripes | are neat      |    $1 |
+
+There must be at least 3 dashes separating each header cell.
+The outer pipes (|) are optional, and you don't need to make the
+raw Markdown line up prettily. You can also use inline Markdown.
+
+Markdown | Less | Pretty
+--- | --- | ---
+*Still* | `renders` | **nicely**
+1 | 2 | 3
+```
+
+## Attributes/Methods
+
+Description and examples of important features the project provides/has/does/.
+
+# Options
+
+Detailed description of each of the command-line options taken by the program.
+
+# Return Value/Errors/Diagnostics/Environment/Files
+
+If applicable any of the above mentioned sections.
+
+# Bugs/Caveats
+
+tells about bugs or issues the user should know about.
+
+# Restrictions
+
+Bugs you don't plan to fix. :-)
+
+# Acknowledgements
+
+is where you thank bug fixers, testers and your parents.
+
+# Copyright/License
+
+mentions copyright restrictions. Don't put the entire GPL there, though :)
+
+# Availability
+
+says where newer versions can be pulled from.
+
+# Author
+
+explains who made it, if COPYRIGHT didn't already do so.

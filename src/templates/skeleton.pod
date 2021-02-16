@@ -1,0 +1,103 @@
+=head1 NAME
+
+My::Module - An example module
+
+=head1 SYNOPSIS
+
+    use My::Module;
+    my $object = My::Module->new();
+    print $object->as_string;
+
+=head1 DESCRIPTION
+
+This module does not really exist, it
+was made for the sole purpose of
+demonstrating how POD works.
+
+=head2 Attributes
+
+=over 12
+
+=item C<var1> -- HashRef
+
+used as very important reference
+
+=back
+
+=head2 Methods
+
+=over 12
+
+=item C<new>
+
+Returns a new My::Module object.
+
+=item C<as_string>
+
+Returns a stringified representation of
+the object. This is mainly for debugging
+purposes.
+
+=back
+
+=head1 OPTIONS
+
+Detailed description of each of the command-line options taken by the program.
+
+=head1 RETURN VALUE/ERRORS/DIAGNOSTICS/ENVIRONMENT/FILES
+
+If applicable any of the above mentioned sections.
+
+=head1 BUGS/CAVEATS
+
+tells about bugs or issues the user should know about.
+
+=head1 RESTRICTIONS
+
+Bugs you don't plan to fix. :-)
+
+=head1 ACKNOWLEDGEMENTS
+
+is where you thank bug fixers, testers and your parents.
+
+=head1 COPYRIGHT/LICENSE
+
+mentions copyright restrictions. Don't put the entire GPL there, though :)
+
+This is released under the Artistic
+License. See L<perlartistic>.
+
+=head1 AVAILABILITY
+
+says where newer versions can be pulled from.
+
+=head1 AUTHOR
+
+explains who made it, if COPYRIGHT didn't already do so.
+
+=head1 SEE ALSO
+
+additional ways to mark up:
+
+I<text> -- italic text,
+Used for emphasis ("be I<careful!>") and parameters ("redo I<LABEL>")
+
+B<text> -- bold text,
+Used for switches ("perl's B<-n> switch"), programs, emphasis ("be B<careful!>"),
+and so on ("and that feature is known as B<autovivification>").
+
+C<code> -- code text,
+Renders code in a typewriter font, or gives some other indication that this
+represents program text
+
+F<filename> -- used for filenames,
+Typically displayed in italics
+
+S<text> -- text contains non-breaking spaces
+
+L<name> -- a hyperlink,
+see https://perldoc.perl.org/perlpod#Formatting-Codes
+
+or send to other man pages: L<perlpod>, L<perlpodspec>
+
+=cut
