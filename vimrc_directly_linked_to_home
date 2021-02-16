@@ -605,6 +605,13 @@ nnoremap <expr> <C-W><C-S> ":".winheight(0)/5."split\<CR>"
 " nnoremap <C-L> <C-W><C-L>
 " nnoremap <C-H> <C-W><C-H>
 
+" ==> buffers
+set hidden
+nnoremap [b :bprev<CR>
+nnoremap ]b :bnext<CR>
+nnoremap <leader>bd :bdelete<CR>
+nnoremap <Leader>bb :ls<CR>:b
+
 " ==> diff
 if &diff
     " diff mode ignore white spaces
