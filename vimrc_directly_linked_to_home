@@ -82,15 +82,15 @@ let g:gitgutter_sign_modified_removed   = '<'
 let g:gitgutter_max_signs               = 9999
 
 " Jump between hunks
-nmap <Leader>hn <Plug>(GitGutterNextHunk)
-nmap <Leader>hp <Plug>(GitGutterPrevHunk)
+nmap ghn <Plug>(GitGutterNextHunk)
+nmap ghp <Plug>(GitGutterPrevHunk)
 
 " Hunk-add and hunk-revert for chunk staging
-nmap <Leader>hs <Plug>(GitGutterStageHunk)
-nmap <Leader>hu <Plug>(GitGutterUndoHunk)
+nmap ghs <Plug>(GitGutterStageHunk)
+nmap ghu <Plug>(GitGutterUndoHunk)
 
 " preview hunk
-nmap <leader>hP <Plug>(GitGutterPreviewHunk)
+nmap ghP <Plug>(GitGutterPreviewHunk)
 
 " ==> gitbranch; https://github.com/itchyny/vim-gitbranch
 
