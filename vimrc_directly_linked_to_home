@@ -477,6 +477,21 @@ noremap <leader>r i<cr><esc>
 noremap <leader><space> i<space><esc>
 noremap <leader><space><space> a<space><esc>
 
+" ==> leader p/y register access
+" visual selection overwrite register p
+vnoremap <leader>y "yy
+" add selection to register p
+vnoremap <leader>Y "Yy
+vnoremap <leader><leader>y "yp
+nnoremap <leader><leader>y "yp
+
+" visual selection overwrite register p
+vnoremap <leader>p "py
+" add selection to register p
+vnoremap <leader>P "Py
+vnoremap <leader><leader>p "pp
+nnoremap <leader><leader>p "pp
+
 " ==> fold
 " folding cheat sheet
 "   zc/o/a      close/open/toggle fold if the cursor is on one
