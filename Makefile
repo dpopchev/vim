@@ -2,12 +2,12 @@
 SHELL := /usr/bin/env bash
 
 # the important stuff
+VIM_HOME := ${HOME}/.vim
 VIMRC := src/vimrc
 TEMPLATES := src/templates
 
 # directory structure
 .PHONY: dirs
-VIM_HOME := ${HOME}/.vim
 PLUGINS_START := $(VIM_HOME)/pack/plugins/start
 TMP := $(VIM_HOME)/tmp
 dirs: $(PLUGINS_START) $(TMP)
@@ -18,8 +18,9 @@ $(PLUGINS_START):
 $(TMP):
 	@mkdir -p $@
 
+GIT := git clone --depth 1 --branch master
 # TODO automate installation
-# git clone --depth 1  --branch master  https://github.com/cameronmcnz/my-github-repo.git master-folder
+.PHONY: PLUGIN_URL
 PLUGIN_URL := https://github.com/jiangmiao/auto-pairs.git
 PLUGIN_URL += https://github.com/tpope/vim-commentary.git
 PLUGIN_URL += https://github.com/kien/ctrlp.vim.git
@@ -39,6 +40,12 @@ PLUGIN_URL += https://github.com/tpope/vim-surround.git
 PLUGIN_URL += https://github.com/nelstrom/vim-visual-star-search.git
 
 .PHONY: install
-install: dirs
-	ln -fs $(realpath $(VIMRC)) ${HOME}/.vimrc
-	ln -fs $(realpath $(TEMPLATES)) $(VIM_HOME)/templates
+install: dirs plugins
+	ln -s $(realpath $(VIMRC)) ${HOME}/.vimrc
+	ln -s $(realpath $(TEMPLATES)) $(VIM_HOME)/templates
+
+.PHONY: plugins
+plugins:
+	@for plugin in $(PLUGIN_URL); do \
+	    cd $(PLUGINS_START) && $(GIT) $$plugin; \
+	done
