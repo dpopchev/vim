@@ -51,7 +51,10 @@ Very brief and short of the project, best with basic example, as shown below
 > `pandoc` integration
 >
 > - to pdf `pandoc source_file.md -o converted_file.pdf`
-> - specify code highlighting `pandoc source_file.md --highlight-style STYLE converted_file.pdf`
+> - specify code highlighting
+>    - `pandoc source_file.md --highlight-style STYLE converted_file.pdf`
+>    - or using `listings` and template at beginning of the file
+>    `pandoc source_file.md --listings converted_file.pdf`
 >
 >     where `STYLE` can be any of the following keywords: pygments, kate,
 >     monochrome, espresso, haddock, tango, zenburn

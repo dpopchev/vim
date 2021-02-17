@@ -535,6 +535,8 @@ $\omega +\phi = \epsilon $
 
 ## tikz drawing
 
+### example graphic
+
 \begin{tikzpicture}[>=triangle 45,font=\sffamily]
     \node (X) at (0,0) {x};
     \node (Y) [below left=2cm and 1cm of X]  {y};% 2cm below, 1cm to the left (optional)
