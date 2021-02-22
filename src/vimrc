@@ -527,8 +527,12 @@ endif
 "   change word under cursor via            z=
 "   add word under cursor to dictionary     zg
 "   remove word from dictionary via         zw
+" to auto download spell, this should be the def site
+" when vim starts first disable :set nospell and then enable :set spell
+let g:spellfile_URL = 'http://ftp.vim.org/vim/runtime/spell'
 set spell          " enable spellcheck
 set spelllang=en   " spellcheck language
+set spelllang+=bg  " spellcheck language
 "set spellfile=... " place to store additional words
 
 hi clear SpellBad
