@@ -566,6 +566,10 @@ inoremap <S-tab> <C-R>=InsertHalfShiftwidth()<cr>
 augroup MarkdownCommentaryString
     autocmd!
     autocmd FileType markdown setlocal commentstring=<!--\ %s\ -->
+    autocmd InsertEnter *.{markdown,md} set conceallevel=0
+    autocmd InsertLeave *.{markdown,md} set conceallevel=2
+    " dirty way to fix markdown underscore messing with latex when they are mixed
+    " autocmd FileType markdown syn clear markdownItalic
 augroup END
 
 " automatic indentation
