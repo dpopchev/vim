@@ -532,7 +532,7 @@ endif
 let g:spellfile_URL = 'http://ftp.vim.org/vim/runtime/spell'
 set spell          " enable spellcheck
 set spelllang=en   " spellcheck language
-set spelllang+=bg  " spellcheck language
+" set spelllang+=bg  " spellcheck language
 "set spellfile=... " place to store additional words
 
 hi clear SpellBad
