@@ -24,7 +24,61 @@ if ( $urgent_count > 0 ) {
 
 Test::Class->runtests;
 
-# place the tests here according to the Test::Class structure
-# or ditch the Test::Class and place them here anyway
+sub startup_method : Test(startup) {
+    my $self = shift;
+
+    note(
+        'All startup methods are run once when you start running a test class.'
+    );
+
+    return;
+}
+
+sub setup_method : Test(setup) {
+    my $self = shift;
+
+    note('All setup tests are run once before every test.');
+
+    return;
+}
+
+sub test_single : Test {
+    my $self = shift;
+
+    note( ( caller(0) )[3] );
+
+    pass('use Test attribute for methods with single test.');
+
+    return;
+}
+
+sub test_multiple : Tests {
+    my $self = shift;
+
+    note( ( caller(0) )[3] );
+
+    pass('use Tests attribute for methods with multiple tests.');
+    pass('when you feel lazy to count them.');
+
+    return;
+}
+
+sub teardown_method : Test(teardown) {
+    my $self = shift;
+
+    note('All teardown tests are run once after every test.');
+
+    return;
+}
+
+sub shutdown_method : Test(shutdown) {
+    my $self = shift;
+
+    note(
+'All shutdown methods are run once just before a test class stops running.'
+    );
+
+    return;
+}
 
 done_testing;
