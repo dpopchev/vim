@@ -17,7 +17,10 @@ use Test::MockFile;
 
 # execute only test cases marked as urgent, e.g. test_name_urgent
 my $urgent_count = 0;
-Test::Class->add_filter( sub { $_[1] =~ /urgent$/i; } ) if $urgent_count > 0;
+if ( $urgent_count > 0 ) {
+    diag('=== FILTER ONLY URGENT ===');
+    Test::Class->add_filter( sub { $_[1] =~ /urgent$/i; } );
+}
 
 Test::Class->runtests;
 
