@@ -13,6 +13,7 @@ use base qw/Test::Class/;
 
 use Test::More;
 use Test::Script;
+use Test::MockFile;
 
 # execute only test cases marked as urgent, e.g. test_name_urgent
 my $urgent_count = 0;
