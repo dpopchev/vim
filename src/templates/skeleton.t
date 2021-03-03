@@ -15,13 +15,8 @@ use Test::More;
 use Test::Script;
 use Test::MockFile;
 
-# execute only test cases marked as urgent, e.g. test_name_urgent
-my $urgent_count = 0;
-if ( $urgent_count ) {
-    diag('=== FILTER ONLY URGENT ===');
-    Test::Class->add_filter( sub { $_[1] =~ /urgent$/i; } );
-}
-
+# run only test named individual_test
+#$ENV{TEST_METHOD} = 'individual_test';
 Test::Class->runtests;
 
 sub startup_method : Test(startup) {
