@@ -617,7 +617,7 @@ nnoremap <expr> <C-W><C-S> ":".winheight(0)/5."split\<CR>"
 set hidden
 nnoremap [b :bprev<CR>
 nnoremap ]b :bnext<CR>
-nnoremap <leader>bd :bdelete<CR>
+nnoremap <leader>bd :bprevious<CR> :bdelete #<CR>
 nnoremap <Leader>bb :ls<CR>:b
 
 " ==> attempt to clean up most syntax highlighting problems
