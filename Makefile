@@ -19,8 +19,7 @@ $(TMP):
 	@mkdir -p $@
 
 GIT := git clone --depth 1 --branch master
-# TODO automate installation
-.PHONY: PLUGIN_URL
+
 PLUGIN_URL := https://github.com/jiangmiao/auto-pairs.git
 PLUGIN_URL += https://github.com/tpope/vim-commentary.git
 PLUGIN_URL += https://github.com/kien/ctrlp.vim.git
@@ -38,6 +37,7 @@ PLUGIN_URL += https://github.com/tpope/vim-repeat.git
 PLUGIN_URL += https://github.com/justinmk/vim-sneak.git
 PLUGIN_URL += https://github.com/tpope/vim-surround.git
 PLUGIN_URL += https://github.com/nelstrom/vim-visual-star-search.git
+PLUGIN_URL += https://github.com/pseewald/vim-anyfold.git
 
 .PHONY: install
 install: dirs plugins
