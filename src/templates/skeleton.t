@@ -1,6 +1,8 @@
 #!/tool/pandora64/bin/perl5.18.1
 
-package Test::ModuleName;
+package TestModuleName;
+
+use base qw/Test::Class/;
 
 use strict;
 use warnings;
@@ -9,11 +11,11 @@ use feature qw/say/;
 
 use Data::Dumper;
 
-use base qw/Test::Class/;
-
 use Test::More;
 use Test::Script;
 use Test::MockFile;
+use Test::Directory;
+use Test::Files;
 
 # run only test named individual_test
 #$ENV{TEST_METHOD} = 'individual_test';
