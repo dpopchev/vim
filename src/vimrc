@@ -507,9 +507,9 @@ nnoremap <leader><leader>p "pp
 set foldenable        " enable folding
 set foldmethod=syntax " fold is based on indent level
 set foldcolumn=0      " sidebar indicating folding
-set foldlevel=5       " folds with higher level will be closed
+set foldlevel=6       " folds with higher level will be closed
 set foldnestmax=10    " maximum nesting of folds
-set foldlevelstart=5  " starting fold level when buffer is opened
+set foldlevelstart=6  " starting fold level when buffer is opened
 
 " ==> completion
 set complete+=kspell " use currently active spell checking
