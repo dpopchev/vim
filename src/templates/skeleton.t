@@ -18,7 +18,7 @@ use Test::Directory;
 use Test::Files;
 
 # run only test named individual_test
-#$ENV{TEST_METHOD} = 'individual_test';
+# local $ENV{TEST_METHOD} = 'individual_test';
 Test::Class->runtests;
 
 sub startup_method : Test(startup) {
