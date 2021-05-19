@@ -39,6 +39,15 @@ sub setup_method : Test(setup) {
     return;
 }
 
+sub setup_00_test_directory : Test(setup) {
+    my $self = shift;
+
+    # NOTE do not specify test dir name as it will break the clean up process
+    $self->{testdir} = Test::Directory->new();
+
+    return;
+}
+
 sub test_single : Test {
     my $self = shift;
 
