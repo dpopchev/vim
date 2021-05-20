@@ -10,6 +10,7 @@ use diagnostics;
 use feature qw/say/;
 
 use Data::Dumper;
+use Path::Tiny;
 
 use Test::More;
 use Test::Script;
@@ -27,6 +28,23 @@ sub startup_method : Test(startup) {
     note(
         'All startup methods are run once when you start running a test class.'
     );
+
+    return;
+}
+
+sub startup_00_set_script_path : Test(startup) {
+    my $self = shift;
+
+    $self->{script} = path("relative/or/absolute/path/to/script");
+
+    return;
+}
+
+sub startup_01_set_script_args : Test(startup) {
+    my $self = shift;
+
+    $self->{script_args} =
+      [ $self->{script}, qw/arguments to use in Test::Script format/ ];
 
     return;
 }
