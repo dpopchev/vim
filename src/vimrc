@@ -652,9 +652,9 @@ nnoremap m<cr><cr> :silent make format FILE=%<bar>redraw!<cr>
 nnoremap mr :silent make run FILE=%<bar>redraw!<bar>copen<cr>
 nnoremap mR :silent make debug FILE=%<bar>redraw!<bar>copen<cr>
 " project vise targets
-nnoremap mt<cr> :silent make test <bar>redraw!<bar>copen<cr>
-nnoremap mT<cr> :silent make profile  <bar>redraw!<bar>copen<cr>
-nnoremap mT :silent make cover  <bar>redraw!<bar>copen<cr>
+nnoremap Mt :silent make test <bar>redraw!<bar>copen<cr>
+nnoremap Mt<cr> :silent make cover <bar>redraw!<bar>copen<cr>
+nnoremap MT :silent make profile <bar>redraw!<bar>copen<cr>
 nnoremap M<cr> :silent make build <bar>redraw!<bar>copen<cr>
 nnoremap Mr :silent make run <bar>redraw!<bar>copen<cr>
 nnoremap MR :silent make debug <bar>redraw!<bar>copen<cr>
