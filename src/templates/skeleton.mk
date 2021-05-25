@@ -1,79 +1,130 @@
 # set preferred shell
-SHELL := /usr/bin/env bash
+# SHELL :=
+
+# set run command, e.g. path to target Perl version interpreter
+# RUN_CMD :=
 
 .DEFAULT_GOAL: none
 .PHONY: none
 none:
-	@echo 'no default goal set as for now'
+	$(error no default goal set)
 
+# key directories as targets to automate creation
 .PHONY: dirs
-MUST_HAVE_DIR := dirname
-dirs: $(MUST_HAVE_DIR)
 
-$(MUST_HAVE_DIR):
-	@mkdir -p $@
+# stand alone software
+# DIR_SRC := src
+
+# modules, libraries, and other support code
+# DIR_LIB := lib
+
+# the test suite
+# DIR_TEST := t
+
+# the stable versions of the script placed for user
+# DIR_PUBLIC :=
+
+# dummy files to track non compiled files
+# DIR_DUMMIES := .dummy
+
+# creation rules
+# $(DIR_SRC) $(DIR_LIB) $(DIR_TEST):
+	# @mkdir --parents $@
+
+# dummy files should not be tracked by git
+# $(DIR_DUMMIES):
+# 	@mkdir --parents $@
+# 	@grep --quiet --fixed-strings '*dummy*' .gitignore || echo '*dummy*' >> .gitignore
+
+# one target to rule them all directory targets
+# dirs: $(DIR_TEST) $(DIR_SRC) $(DIR_DUMMIES)
 
 .PHONY: compile
-COMPILE :=
+COMPILE := $(RUN_CMD)
 compile:
-	@echo 'no compile rules, targets and dependants set'
-	@echo 'make compile FILE=... creates $(FILE) variable to use'
+ifdef FILE
+	@$(COMPILE) $(FILE)
+else
+	$(error missing file, pass with FILE=file)
+endif
 
 .PHONY: lint
 LINT :=
 lint:
-	@echo 'no lint rules'
+ifdef FILE
+	@$(LINT) $(FILE)
+else
+	$(error missing file, pass with FILE=file)
+endif
 
-.PHONY: aformat
-AFORMAT :=
-aformat:
-	@echo 'no auto format rules'
+.PHONY: format
+FORMAT :=
+format:
+ifdef FILE
+	@$(FORMAT) $(FILE)
+else
+	$(error missing file, pass with FILE=file)
+endif
 
-.PHONY: exec
-EXEC :=
-exec: compile
-	@echo 'no execution rule set'
-
-.PHONY: debug_file
-DEBUG_FILE :=
-debug_file: compile
-	@echo 'no execution rule with debugger rule set'
-
-DUMMY_FILE_COUNTERPART :=
-
-$(DUMMY_FILE_COUNTERPART): %.dummy: %.source | $(DUMMY_DIR_TO_COLLECT_THEM)
-	@echo 'maybe we want to track files, which cannot be targets'
-	@echo 'and thus cannot be build in the sense of objects from C sources'
-	@echo 'to be able to track those anyway, create dummy targets'
-	@echo 'each on of them depends on the desired source file'
-	@echo 'and tracks its modification timestamp'
-
-.PHONY: test
-RUN_TEST :=
-test:
-	@echo 'no test rules set'
-
-.PHONY: build
-BUILD :=
-build:
-	@echo 'no build rules set'
-
+MAIN :=
 .PHONY: run
+RUN := $(RUN_CMD)
 run:
-	@echo 'no run rules set'
+ifdef FILE
+	@$(RUN) $(FILE) $(ARGS)
+else
+	@$(RUN) $(MAIN) $(ARGS)
+endif
 
 .PHONY: debug
+DEBUG := $(RUN_CMD)
 debug:
-	@echo 'no run with debugger set'
+ifdef FILE
+	@$(DEBUG) $(FILE) $(ARGS)
+else
+	@$(DEBUG) $(MAIN) $(ARGS)
+endif
 
 .PHONY: clean
+CLEAN := rm --recursive --force
 clean:
-	@echo 'no clean rules set'
+	@$(CLEAN)
+
+.PHONY: test
+TEST :=
+
+TEST_TARGETS := $(wildcard $(DIR)/*)
+TEST_UNITS := $(addsuffix .mod,$(basename $(notdir $(TEST_TARGETS))))
+TEST_DUMMIES := $(addprefix $(DIR_DUMMIES)/,$(TEST_UNITS))
+$(TEST_DUMMIES): $(DIR_DUMMIES)/%.mod: $(DIR)/% | $(DIR_DUMMIES)
+	@printf "\n======= Testing $* \n\n"
+	@$(TEST) $(DIR_TEST)/$*
+	@touch $@
+	@printf "\n======= End test $* \n\n"
+
+test: $(TEST_DUMMIES)
+
+.PHONY: build
+BUILD := $(RUN_CMD)
+build:
+	@$(BUILD) $(MAIN)
+
+.PHONY: profile
+PROFILE :=
+profle:
+	@$(PROFILE)
+
+.PHONY: cover
+COVER :=
+cover:
+	@$(COVER)
 
 .PHONY: deploy
+DEPLOY :=
 deploy:
-	@echo 'no deploy rules set'
+	@$(DEPLOY)
 
 .PHONY: install
-install:
-	@echo 'no install rules set'
+INSTALL :=
+deploy:
+	@$(INSTALL)
