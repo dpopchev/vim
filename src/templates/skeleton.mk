@@ -96,7 +96,7 @@ TEST :=
 TEST_TARGETS := $(wildcard $(DIR)/*)
 TEST_UNITS := $(addsuffix .mod,$(basename $(notdir $(TEST_TARGETS))))
 TEST_DUMMIES := $(addprefix $(DIR_DUMMIES)/,$(TEST_UNITS))
-$(TEST_DUMMIES): $(DIR_DUMMIES)/%.mod: $(DIR)/% | $(DIR_DUMMIES)
+$(DIR_DUMMIES)/%.mod: $(DIR)/% | $(DIR_DUMMIES)
 	@printf "\n======= Testing $* \n\n"
 	@$(TEST) $(DIR_TEST)/$*
 	@touch $@
