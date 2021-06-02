@@ -178,6 +178,11 @@ let g:goyo_margin_bottom = 0
 
 nnoremap <leader>e :Goyo<cr>
 
+augroup goyou_enable_plugins
+    autocmd!
+    autocmd User GoyoEnter :GitGutterToggle
+augroup END
+
 " ==> vim-illuminate
 let g:Illuminate_delay = 250
 let g:Illuminate_highlightUnderCursor = 1
@@ -647,8 +652,8 @@ endif
 " ==> make/build/compile/run/lint/test/autoformat Makefile shortcuts
 " file vise targets
 nnoremap m<cr> :silent make compile FILE=%<bar>redraw!<bar>copen<cr>
-nnoremap M<cr> :silent make lint FILE=%<bar>redraw!<bar>copen<cr>
 nnoremap m<cr><cr> :silent make format FILE=%<bar>redraw!<cr>
+nnoremap ml :silent make lint FILE=%<bar>redraw!<bar>copen<cr>
 nnoremap mr :silent make run FILE=%<bar>redraw!<bar>copen<cr>
 nnoremap mR :silent make debug FILE=%<bar>redraw!<bar>copen<cr>
 " project vise targets
