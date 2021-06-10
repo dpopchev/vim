@@ -22,7 +22,7 @@ use Test::Files;
 # local $ENV{TEST_METHOD} = 'individual_test';
 Test::Class->runtests;
 
-# BEGIN { use_ok $module }
+# BEGIN { use_ok $module or die }
 # BEGIN { can_ok $module, @methods }
 
 sub startup_method : Test(startup) {
