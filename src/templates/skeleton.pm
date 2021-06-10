@@ -1,6 +1,6 @@
 #!/tool/pandora64/bin/perl5.18.1
 
-package DO_NOT_FORGET_PACKAGE_NAME;
+package Template::SampleName;
 
 use strict;
 use warnings;
@@ -10,4 +10,12 @@ use feature qw/say/;
 use Exporter 'import';
 our @EXPORT_OK = qw/fill_here_subs_to_expose/;
 
+# use Moose;
+
 use Data::Dumper;
+
+# if using Moose, instead of generic true statement,
+# advisable to end with following:
+# __PACKAGE__->meta->make_immutable;
+# no Moose;
+1;
