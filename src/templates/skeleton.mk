@@ -97,14 +97,27 @@ endif
 .PHONY: test
 TEST :=
 
-TEST_TARGETS := $(wildcard $(DIR)/*)
-TEST_UNITS := $(addsuffix .mod,$(basename $(notdir $(TEST_TARGETS))))
-TEST_DUMMIES := $(addprefix $(DIR_DUMMIES)/,$(TEST_UNITS))
-$(DIR_DUMMIES)/%.mod: $(DIR)/% | $(DIR_DUMMIES)
-	@printf "\n======= Testing $* \n\n"
-	@$(TEST) $(DIR_TEST)/$*
+TEST_TARGETS := $(shell find $(DIR_LIB) -type f)
+TEST_TARGETS += $(shell find $(DIR_SRC) -type f)
+
+TEST_DUMMIES := $(addprefix $(DIR_DUMMY)/,$(TEST_TARGETS:%.extension=%.mod))
+
+TEST_DUMMIES_DIRS := $(dir $(TEST_DUMMIES))
+# sort removes duplicates
+TEST_DUMMIES_DIRS := $(sort $(TEST_DUMMIES_DIRS))
+
+$(TEST_DUMMIES_DIRS):
+	@mkdir --parents $@
+
+$(TEST_DUMMIES): $(DIR_DUMMY)/%.mod: %.extension | $(TEST_DUMMIES_DIRS)
+	@printf "Testing $*\n"
+	@printf -- '-%.0s' {1..$(shell expr 8 + $(shell echo $* | wc -m))}
+	@printf "\n\n"
 	@touch $@
-	@printf "\n======= End test $* \n\n"
+	@$(TEST) $(DIR_TEST)/$(shell echo $* | grep -Po '(?<=lib[/])\w+\b')/run_$(*F)Test.t
+	@printf "\nEnd testing $*\n"
+	@printf '=%.0s' {1..$(shell expr 12 + $(shell echo $* | wc -m))}
+	@printf "\n\n"
 
 test: $(TEST_DUMMIES)
 
