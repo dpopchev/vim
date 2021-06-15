@@ -25,19 +25,19 @@ none:
 # DIR_PUBLIC :=
 
 # dummy files to track non compiled files
-# DIR_DUMMIES := .dummy
+# DIR_DUMMY := .dummy
 
 # creation rules
 # $(DIR_SRC) $(DIR_LIB) $(DIR_TEST):
 	# @mkdir --parents $@
 
 # dummy files should not be tracked by git
-# $(DIR_DUMMIES):
+# $(DIR_DUMMY):
 # 	@mkdir --parents $@
 # 	@grep --quiet --fixed-strings '*dummy*' .gitignore || echo '*dummy*' >> .gitignore
 
 # one target to rule them all directory targets
-# dirs: $(DIR_TEST) $(DIR_SRC) $(DIR_DUMMIES)
+# dirs: $(DIR_SRC) $(DIR_LIB) $(DIR_TEST) $(DIR_DUMMY)
 
 .PHONY: compile
 COMPILE := $(RUN_CMD)
