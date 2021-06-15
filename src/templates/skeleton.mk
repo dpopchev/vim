@@ -66,6 +66,11 @@ else
 	$(error missing file, pass with FILE=file)
 endif
 
+.PHONY: build
+BUILD := $(RUN_CMD)
+build:
+	@$(BUILD) $(MAIN)
+
 MAIN :=
 .PHONY: run
 RUN := $(RUN_CMD)
@@ -85,11 +90,6 @@ else
 	@$(DEBUG) $(MAIN) $(ARGS)
 endif
 
-.PHONY: clean
-CLEAN := rm --recursive --force
-clean:
-	@$(CLEAN)
-
 .PHONY: test
 TEST :=
 
@@ -104,10 +104,10 @@ $(DIR_DUMMIES)/%.mod: $(DIR)/% | $(DIR_DUMMIES)
 
 test: $(TEST_DUMMIES)
 
-.PHONY: build
-BUILD := $(RUN_CMD)
-build:
-	@$(BUILD) $(MAIN)
+.PHONY: clean
+CLEAN := rm --recursive --force
+clean:
+	@$(CLEAN)
 
 .PHONY: profile
 PROFILE :=
