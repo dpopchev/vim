@@ -76,7 +76,11 @@ MAIN :=
 RUN := $(RUN_CMD)
 run:
 ifdef FILE
+    ifeq ($(findstring $(DIR_TEST)/,$(FILE)),$(DIR_TEST)/)
+	@$(RUN) $(shell grep 'nearest_run_of_test' $(DIR_TEST)/ | head -n1)
+    else
 	@$(RUN) $(FILE) $(ARGS)
+    endif
 else
 	@$(RUN) $(MAIN) $(ARGS)
 endif
