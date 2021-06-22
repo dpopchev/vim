@@ -18,5 +18,4 @@ use Data::Dumper;
 # if using Moose, instead of generic true statement,
 # advisable to end with following:
 # __PACKAGE__->meta->make_immutable;
-# no Moose;
 1;
